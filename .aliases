@@ -1,0 +1,13 @@
+#   ---------------------------------------
+#   ALIASES
+#   ---------------------------------------
+
+# Entrar a mis sitios web
+alias sites="cd ~/MARCELO/CODE"
+
+# Para moverse más cómodo por carpetas
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ~="cd ~"
+alias -- -="cd -"
