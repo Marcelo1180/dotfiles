@@ -9,6 +9,7 @@ sudo rm -R ~/neovim-config
 # Update and install
 sudo apt-get update && apt-get install -y \
       bash \
+      fish \
       curl \
       wget \
       git \
@@ -42,19 +43,30 @@ sudo apt-get update && apt-get install -y \
 # sqlite3 (base de datos portable)
 # locales (idiomas para SO)
 # tmux (Gestor de layouts terminal)
+# fish (Terminal ligera para shell)
+
+# Desinstalar Neovim
+# sudo rm /usr/local/bin/nvim
+# sudo rm -r /usr/local/share/nvim/
 
 # Instalacion de Neovim
 sudo git clone https://github.com/neovim/neovim.git ~/neovim && \
       cd ~/neovim && \
-      make CMAKE_BUILD_TYPE=RelWithDebInfo && \
-      make install
+      sudo make CMAKE_BUILD_TYPE=RelWithDebInfo && \
+      sudo make install
+
+# Instalacion de Fzf
+sudo git clone https://github.com/junegunn/fzf.git ~/.fzf && \
+			~/.fzf/install --all
 
 # Instalacion de Personalizacion para Neovim
 sudo git clone https://github.com/kristijanhusak/neovim-config.git ~/neovim-config && \
-      mkdir -p ~/.fonts && \
+      sudo mkdir -p ~/.fonts && \
       cd ~/neovim-config && \
-      chmod +x install.sh && \
+      sudo chmod +x install.sh && \
       sed -i '3,${/zsh/d}' install.sh && \
+      sed -i '3,${/z.sh/d}' install.sh && \
+      sed -i '/ln -s/d' install.sh && \
       sed -i 's/apt-get install/apt-get install -y/g' install.sh && \
       sed -i 's/sudo//g' install.sh && \
       sed -i '/nvim -c/d' install.sh
@@ -72,7 +84,6 @@ sudo pip3 install neovim jedi flake8 flake8-docstrings flake8-isort flake8-quote
 
 ########################################
 # Instalacion de Plugins NVIM
-# nvim -c 'silent' -c 'VimEnter' -c 'PlugInstall' -c 'qa!'
 nvim +silent +VimEnter +PlugInstall +qall
 
 

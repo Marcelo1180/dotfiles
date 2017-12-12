@@ -11,3 +11,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias ~="cd ~"
 alias -- -="cd -"
+
+alias la="ls -la"
+
+alias code="cd ~/MARCELO/CODE/"

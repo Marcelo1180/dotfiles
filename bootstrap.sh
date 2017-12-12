@@ -2,16 +2,20 @@
 
 cd "$(dirname "${BASH_SOURCE}")";
 
-git pull origin master;
+# git pull origin master;
 
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
-		--exclude "bootstrap.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+  for f in $(ls .[^.]* -1da --ignore={".","..",".git",".DS_Store",".osx"}); do
+    case "$f" in
+      .config)
+        ln -sf $(pwd)/.config/nvim/.init.vim ~/.config/nvim/init.vim
+        ln -sf $(pwd)/.config/nvim/.snippets ~/.config/nvim/snippets
+        ;;
+      *)
+        ln -sf $(pwd)/$f ~/$f
+        ;;
+    esac
+  done
 	source ~/.bash_profile;
 }
 
