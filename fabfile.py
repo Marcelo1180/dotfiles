@@ -17,6 +17,7 @@ def aplicaciones():
       curl \
       wget \
       git \
+      xclip \
       python-dev \
       python-pip \
       python3-dev \

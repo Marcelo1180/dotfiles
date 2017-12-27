@@ -13,7 +13,7 @@ git clone https://github.com/Marcelo1180/dotfiles.git ~/.dotfiles
 fab -H localhost install
 ```
 
-Agregar lo siguient en el ~/.bashrc
+edit ~/.bashrc
 ```bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 if [[ ! $TERM =~ screen ]]; then
