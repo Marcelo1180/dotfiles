@@ -48,7 +48,9 @@ def fzf():
         run('bash install --all')
 
 def neovim():
-    sudo('pipinstall neovim jedi flake8 flake8-docstrings flake8-isort \
+    sudo('rm -f /usr/local/bin/nvim')
+    sudo('rm -fR /usr/local/bin/nvim/')
+    sudo('pip install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort')
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort mypy')
@@ -64,6 +66,10 @@ def bootstrap():
     with cd(DEPLOY_PATH):
         run('bash bootstrap.sh')
 
+def tmux():
+    run('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
+    run('tmux source ~/.tmux.conf')
+
 
 @task
 def install():
@@ -71,3 +77,4 @@ def install():
     fzf()
     neovim()
     bootstrap()
+    tmux()

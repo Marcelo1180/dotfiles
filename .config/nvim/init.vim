@@ -25,7 +25,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Plug 'takac/vim-hardtime'
-Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
+" Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
 
 call plug#end()
 "}}}
@@ -92,14 +92,19 @@ set undofile
 
 " }}}
 " ================ Indentation ====================== {{{
-
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+" https://wiki.python.org/moin/Vim
+" set textwidth=120
+set shiftwidth=4
+set softtabstop=4
+set tabstop=8
 set expandtab
 set smartindent
 set nofoldenable
 set colorcolumn=80
+
+autocmd Filetype javascript set softtabstop=2
+autocmd Filetype javascript set sw=2
+autocmd Filetype javascript set ts=2
 
 " }}}
 " ================ Auto commands ====================== {{{
@@ -315,8 +320,11 @@ nnoremap <Leader>] <C-W>v<C-]>
 " Reformat and fix linting errors
 nnoremap <Leader>r :ALEFix<CR>
 
+" Buscar tareas pendientes
+nnoremap <F3> :Ag TODO<CR>
+
 " }}}
-" ================ Plugins setups ======================== {{{
+" ===========ç===== Plugins setups ======================== {{{
 
 let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
 let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
