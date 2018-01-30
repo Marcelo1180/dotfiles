@@ -323,6 +323,9 @@ nnoremap <Leader>r :ALEFix<CR>
 " Buscar tareas pendientes
 nnoremap <F3> :Ag TODO<CR>
 
+" Buscar tareas pendientes
+nnoremap <F4> :!npm run lint<CR>
+nnoremap <F5> :!npm run lint -- --fix<CR>
 " }}}
 " ===========ç===== Plugins setups ======================== {{{
 
@@ -372,3 +375,4 @@ let g:hardtime_ignore_buffer_patterns = ['NERD.*']                              
 
 " }}}
 " vim:foldenable:foldmethod=marker
+hi Normal guibg=NONE ctermbg=NONE

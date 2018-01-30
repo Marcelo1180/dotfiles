@@ -1,0 +1,381 @@
+yurinia_db_oldsystem=# \d SequelizeMeta
+No se encontró relación llamada «SequelizeMeta».
+yurinia_db_oldsystem=# \d feriado
+                                                  Tabla «public.feriado»
+        Columna        |           Tipo           |                             Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------------
+ id_feriado            | integer                  | not null valor por omisión nextval('feriado_id_feriado_seq'::regclass)
+ fecha                 | date                     | not null
+ descripcion           | text                     |
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+Índices:
+    "feriado_pkey" PRIMARY KEY, btree (id_feriado)
+
+yurinia_db_oldsystem=# \d nombres_tentativos
+                                                       Tabla «public.nombres_tentativos»
+        Columna        |           Tipo           |                                       Modificadores
+-----------------------+--------------------------+--------------------------------------------------------------------------------------------
+ id_nombre_tentativo   | integer                  | not null valor por omisión nextval('nombres_tentativos_id_nombre_tentativo_seq'::regclass)
+ nombre_empresa        | character varying(500)   |
+ mensaje               | character varying(500)   |
+ estado                | character varying(500)   | not null
+ _usuario_creacion     | integer                  |
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+Índices:
+    "nombres_tentativos_pkey" PRIMARY KEY, btree (id_nombre_tentativo)
+
+yurinia_db_oldsystem=# \d usuario
+                                                  Tabla «public.usuario»
+        Columna        |           Tipo           |                             Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------------
+ id_usuario            | integer                  | not null valor por omisión nextval('usuario_id_usuario_seq'::regclass)
+ email                 | character varying(100)   | not null
+ usuario               | character varying(100)   | not null
+ contrasena            | character varying(255)   | not null valor por omisión ''::character varying
+ observaciones         | character varying(100)   |
+ codigo_contrasena     | character varying(8)     |
+ fecha_expiracion      | timestamp with time zone |
+ token                 | character varying(50)    |
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_persona           | integer                  | not null
+Índices:
+    "usuario_pkey" PRIMARY KEY, btree (id_usuario)
+    "usuario_email_key" UNIQUE CONSTRAINT, btree (email)
+    "usuario_usuario_key" UNIQUE CONSTRAINT, btree (usuario)
+Restricciones de llave foránea:
+    "usuario_fid_persona_fkey" FOREIGN KEY (fid_persona) REFERENCES persona(id_persona) ON UPDATE CASCADE
+Referenciada por:
+    TABLE "usuario_rol" CONSTRAINT "usuario_rol_fid_usuario_fkey" FOREIGN KEY (fid_usuario) REFERENCES usuario(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
+
+yurinia_db_oldsystem=# \d rol
+                                                Tabla «public.rol»
+        Columna        |           Tipo           |                         Modificadores
+-----------------------+--------------------------+----------------------------------------------------------------
+ id_rol                | integer                  | not null valor por omisión nextval('rol_id_rol_seq'::regclass)
+ nombre                | character varying(100)   | not null
+ descripcion           | character varying(200)   |
+ peso                  | integer                  | not null
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+Índices:
+    "rol_pkey" PRIMARY KEY, btree (id_rol)
+Referenciada por:
+    TABLE "rol_menu" CONSTRAINT "rol_menu_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "rol_ruta" CONSTRAINT "rol_ruta_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "usuario_rol" CONSTRAINT "usuario_rol_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+
+yurinia_db_oldsystem=# \d balance
+                                                  Tabla «public.balance»
+        Columna        |           Tipo           |                             Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------------
+ id_balance            | integer                  | not null valor por omisión nextval('balance_id_balance_seq'::regclass)
+ clave_tipo            | character varying(50)    | not null
+ clave_subtipo         | character varying(50)    | not null
+ clave_atributo_fijo   | character varying(50)    |
+ clave_atributo_manual | character varying(50)    |
+ valor                 | double precision         | not null
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_solicitud         | integer                  |
+Índices:
+    "balance_pkey" PRIMARY KEY, btree (id_balance)
+Restricciones de llave foránea:
+    "balance_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE ON DELETE SET NULL
+
+yurinia_db_oldsystem=# \d ruta
+                                                 Tabla «public.ruta»
+        Columna        |           Tipo           |                          Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------
+ id_ruta               | integer                  | not null valor por omisión nextval('ruta_id_ruta_seq'::regclass)
+ ruta                  | character varying(150)   | not null
+ descripcion           | character varying(200)   |
+ method_get            | boolean                  |
+ method_post           | boolean                  |
+ method_put            | boolean                  |
+ method_delete         | boolean                  |
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+Índices:
+    "ruta_pkey" PRIMARY KEY, btree (id_ruta)
+    "ruta_ruta_key" UNIQUE CONSTRAINT, btree (ruta)
+Referenciada por:
+    TABLE "rol_ruta" CONSTRAINT "rol_ruta_fid_ruta_fkey" FOREIGN KEY (fid_ruta) REFERENCES ruta(id_ruta) ON UPDATE CASCADE
+
+yurinia_db_oldsystem=# \d parametro
+                                         Tabla «public.parametro»
+        Columna        |           Tipo           |                     Modificadores
+-----------------------+--------------------------+--------------------------------------------------------
+ clave                 | character varying(255)   | not null
+ valor                 | text                     | not null
+ grupo                 | text                     | not null
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+Índices:
+    "parametro_pkey" PRIMARY KEY, btree (clave)
+Referenciada por:
+    TABLE "persona" CONSTRAINT "persona_nacionalidad_fkey" FOREIGN KEY (nacionalidad) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+    TABLE "persona" CONSTRAINT "persona_tipo_documento_identidad_fkey" FOREIGN KEY (tipo_documento_identidad) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+    TABLE "representante" CONSTRAINT "representante_rol_empresa_fkey" FOREIGN KEY (rol_empresa) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+
+yurinia_db_oldsystem=# \d persona
+                                                    Tabla «public.persona»
+         Columna          |           Tipo           |                             Modificadores
+--------------------------+--------------------------+------------------------------------------------------------------------
+ id_persona               | integer                  | not null valor por omisión nextval('persona_id_persona_seq'::regclass)
+ documento_identidad      | character varying(25)    | not null
+ complemento_documento    | character varying(20)    |
+ expedido                 | character varying(20)    |
+ fecha_nacimiento         | date                     | not null
+ nombres                  | character varying(100)   | not null
+ primer_apellido          | character varying(100)   |
+ segundo_apellido         | character varying(100)   |
+ direccion                | character varying(100)   |
+ genero                   | character varying(10)    |
+ estado                   | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion        | integer                  | not null
+ _usuario_modificacion    | integer                  |
+ _fecha_creacion          | timestamp with time zone | not null
+ _fecha_modificacion      | timestamp with time zone | not null
+ tipo_documento_identidad | character varying(255)   |
+ nacionalidad             | character varying(255)   |
+Índices:
+    "persona_pkey" PRIMARY KEY, btree (id_persona)
+Restricciones de llave foránea:
+    "persona_nacionalidad_fkey" FOREIGN KEY (nacionalidad) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+    "persona_tipo_documento_identidad_fkey" FOREIGN KEY (tipo_documento_identidad) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+Referenciada por:
+    TABLE "representante" CONSTRAINT "representante_fid_persona_fkey" FOREIGN KEY (fid_persona) REFERENCES persona(id_persona) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "usuario" CONSTRAINT "usuario_fid_persona_fkey" FOREIGN KEY (fid_persona) REFERENCES persona(id_persona) ON UPDATE CASCADE
+
+yurinia_db_oldsystem=# \d representante
+                                                     Tabla «public.representante»
+        Columna        |           Tipo           |                                   Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------------------------
+ id_representante      | integer                  | not null valor por omisión nextval('representante_id_representante_seq'::regclass)
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_persona           | integer                  | not null
+ fid_solicitud         | integer                  |
+ rol_empresa           | character varying(255)   |
+Índices:
+    "representante_pkey" PRIMARY KEY, btree (id_representante)
+Restricciones de llave foránea:
+    "representante_fid_persona_fkey" FOREIGN KEY (fid_persona) REFERENCES persona(id_persona) ON UPDATE CASCADE ON DELETE CASCADE
+    "representante_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE ON DELETE SET NULL
+    "representante_rol_empresa_fkey" FOREIGN KEY (rol_empresa) REFERENCES parametro(clave) ON UPDATE CASCADE ON DELETE SET NULL
+
+yurinia_db_oldsystem=# \d rol_menu
+                                                   Tabla «public.rol_menu»
+        Columna        |           Tipo           |                              Modificadores
+-----------------------+--------------------------+--------------------------------------------------------------------------
+ id_rol_menu           | integer                  | not null valor por omisión nextval('rol_menu_id_rol_menu_seq'::regclass)
+ method_get            | boolean                  | valor por omisión false
+ method_post           | boolean                  | valor por omisión false
+ method_put            | boolean                  | valor por omisión false
+ method_delete         | boolean                  | valor por omisión false
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_menu              | integer                  | not null
+ fid_rol               | integer                  | not null
+Índices:
+    "rol_menu_pkey" PRIMARY KEY, btree (id_rol_menu)
+    "rol_menu_fid_menu_fid_rol_key" UNIQUE CONSTRAINT, btree (fid_menu, fid_rol)
+Restricciones de llave foránea:
+    "rol_menu_fid_menu_fkey" FOREIGN KEY (fid_menu) REFERENCES menu(id_menu) ON UPDATE CASCADE ON DELETE CASCADE
+    "rol_menu_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+
+yurinia_db_oldsystem=# \d rol_ruta
+                                                   Tabla «public.rol_ruta»
+        Columna        |           Tipo           |                              Modificadores
+-----------------------+--------------------------+--------------------------------------------------------------------------
+ id_rol_ruta           | integer                  | not null valor por omisión nextval('rol_ruta_id_rol_ruta_seq'::regclass)
+ method_get            | boolean                  | valor por omisión false
+ method_post           | boolean                  | valor por omisión false
+ method_put            | boolean                  | valor por omisión false
+ method_delete         | boolean                  | valor por omisión false
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_rol               | integer                  | not null
+ fid_ruta              | integer                  | not null
+Índices:
+    "rol_ruta_pkey" PRIMARY KEY, btree (id_rol_ruta)
+    "rol_ruta_fid_rol_fid_ruta_key" UNIQUE CONSTRAINT, btree (fid_rol, fid_ruta)
+Restricciones de llave foránea:
+    "rol_ruta_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+    "rol_ruta_fid_ruta_fkey" FOREIGN KEY (fid_ruta) REFERENCES ruta(id_ruta) ON UPDATE CASCADE
+
+yurinia_db_oldsystem=# \d usuario_rol
+                                                    Tabla «public.usuario_rol»
+        Columna        |           Tipo           |                                 Modificadores
+-----------------------+--------------------------+--------------------------------------------------------------------------------
+ id_usuario_rol        | integer                  | not null valor por omisión nextval('usuario_rol_id_usuario_rol_seq'::regclass)
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_rol               | integer                  | not null
+ fid_usuario           | integer                  | not null
+Índices:
+    "usuario_rol_pkey" PRIMARY KEY, btree (id_usuario_rol)
+Restricciones de llave foránea:
+    "usuario_rol_fid_rol_fkey" FOREIGN KEY (fid_rol) REFERENCES rol(id_rol) ON UPDATE CASCADE ON DELETE CASCADE
+    "usuario_rol_fid_usuario_fkey" FOREIGN KEY (fid_usuario) REFERENCES usuario(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
+
+yurinia_db_oldsystem=# \d actividad
+                                                   Tabla «public.actividad»
+        Columna        |           Tipo           |                               Modificadores
+-----------------------+--------------------------+----------------------------------------------------------------------------
+ id_actividad          | integer                  | not null valor por omisión nextval('actividad_id_actividad_seq'::regclass)
+ tipo_actividad        | character varying(30)    |
+ clase                 | character varying(30)    |
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_solicitud         | integer                  | not null
+Índices:
+    "actividad_pkey" PRIMARY KEY, btree (id_actividad)
+Restricciones de llave foránea:
+    "actividad_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE
+
+yurinia_db_oldsystem=# \d dpa
+                                                Tabla «public.dpa»
+        Columna        |           Tipo           |                         Modificadores
+-----------------------+--------------------------+----------------------------------------------------------------
+ id_dpa                | integer                  | not null valor por omisión nextval('dpa_id_dpa_seq'::regclass)
+ codUnidadTerritorial  | character varying(10)    | not null
+ departamento          | character varying(15)    | not null
+ provincia             | character varying(100)   | not null
+ codProvincia          | character varying(10)    | not null
+ municipio             | character varying(50)    | not null
+ codMunicipio          | character varying(10)    | not null
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_dpa_superior      | integer                  |
+Índices:
+    "dpa_pkey" PRIMARY KEY, btree (id_dpa)
+Restricciones de llave foránea:
+    "dpa_fid_dpa_superior_fkey" FOREIGN KEY (fid_dpa_superior) REFERENCES dpa(id_dpa) ON UPDATE CASCADE ON DELETE SET NULL
+Referenciada por:
+    TABLE "dpa" CONSTRAINT "dpa_fid_dpa_superior_fkey" FOREIGN KEY (fid_dpa_superior) REFERENCES dpa(id_dpa) ON UPDATE CASCADE ON DELETE SET NULL
+
+yurinia_db_oldsystem=# \d solicitud
+                                                        Tabla «public.solicitud»
+             Columna             |           Tipo           |                               Modificadores
+---------------------------------+--------------------------+----------------------------------------------------------------------------
+ id_solicitud                    | integer                  | not null valor por omisión nextval('solicitud_id_solicitud_seq'::regclass)
+ email_solicitud                 | character varying(500)   | not null
+ nombre_empresa                  | character varying(500)   | not null
+ fecha_reserva                   | date                     | not null
+ dias_reserva                    | integer                  | not null
+ fecha_fin_dia_reserva           | date                     |
+ fecha_fin_hora_reserva          | time without time zone   |
+ fecha_fin_hora_dia_reserva      | date                     |
+ clave_tipo_sociedad_empresa     | character varying(500)   | not null
+ codigo_ticket                   | character varying(500)   |
+ calle_avenida                   | text                     |
+ estado                          | character varying(500)   | valor por omisión 'CREADO'::character varying
+ numero                          | character varying(500)   |
+ zona                            | character varying(500)   |
+ unidad_vecinal                  | text                     |
+ manzana                         | character varying(500)   |
+ edificio                        | character varying(500)   |
+ piso                            | character varying(500)   |
+ numero_oficina                  | character varying(500)   |
+ numero_casilla_postal           | character varying(500)   |
+ referencia                      | text                     |
+ dpa                             | character varying(500)   |
+ geohash                         | character varying(500)   |
+ telefono                        | character varying(500)   |
+ correo_electronico              | character varying(500)   |
+ fax                             | character varying(500)   |
+ pagina_web                      | character varying(500)   |
+ persona_contacto                | text                     |
+ telefono_contacto               | character varying(500)   |
+ telefono_area_comercial         | character varying(500)   |
+ correo_area_comercial           | character varying(500)   |
+ principales_productos_servicios | text                     |
+ objeto_empresa                  | text                     |
+ capital_suscrito                | double precision         |
+ capital_pagado                  | double precision         |
+ capital_autorizado              | double precision         |
+ capital_asignado                | double precision         |
+ clave_gestion_fiscal            | character varying(500)   |
+ _usuario_creacion               | integer                  |
+ _usuario_modificacion           | integer                  |
+ fecha_inicio_apertura           | date                     |
+ fecha_fin_apertura              | date                     |
+ ruta_documento_subido           | text                     |
+ estado_documento_subido         | boolean                  |
+ _fecha_creacion                 | timestamp with time zone | not null
+ _fecha_modificacion             | timestamp with time zone | not null
+ nombre_dividido                 | jsonb                    |
+Índices:
+    "solicitud_pkey" PRIMARY KEY, btree (id_solicitud)
+    "solicitud_codigo_ticket_key" UNIQUE CONSTRAINT, btree (codigo_ticket)
+Referenciada por:
+    TABLE "actividad" CONSTRAINT "actividad_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE
+    TABLE "balance" CONSTRAINT "balance_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE ON DELETE SET NULL
+    TABLE "representante" CONSTRAINT "representante_fid_solicitud_fkey" FOREIGN KEY (fid_solicitud) REFERENCES solicitud(id_solicitud) ON UPDATE CASCADE ON DELETE SET NULL
+
+yurinia_db_oldsystem=# \d menu
+                                                 Tabla «public.menu»
+        Columna        |           Tipo           |                          Modificadores
+-----------------------+--------------------------+------------------------------------------------------------------
+ id_menu               | integer                  | not null valor por omisión nextval('menu_id_menu_seq'::regclass)
+ nombre                | character varying(100)   | not null
+ descripcion           | character varying(150)   |
+ orden                 | integer                  | not null
+ ruta                  | character varying(100)   |
+ icono                 | character varying(100)   |
+ method_get            | boolean                  |
+ method_post           | boolean                  |
+ method_put            | boolean                  |
+ method_delete         | boolean                  |
+ estado                | character varying(30)    | not null valor por omisión 'ACTIVO'::character varying
+ _usuario_creacion     | integer                  | not null
+ _usuario_modificacion | integer                  |
+ _fecha_creacion       | timestamp with time zone | not null
+ _fecha_modificacion   | timestamp with time zone | not null
+ fid_menu_padre        | integer                  |
+Índices:
+    "menu_pkey" PRIMARY KEY, btree (id_menu)
+Restricciones de llave foránea:
+    "menu_fid_menu_padre_fkey" FOREIGN KEY (fid_menu_padre) REFERENCES menu(id_menu) ON UPDATE CASCADE ON DELETE SET NULL
+Referenciada por:
+    TABLE "menu" CONSTRAINT "menu_fid_menu_padre_fkey" FOREIGN KEY (fid_menu_padre) REFERENCES menu(id_menu) ON UPDATE CASCADE ON DELETE SET NULL
+    TABLE "rol_menu" CONSTRAINT "rol_menu_fid_menu_fkey" FOREIGN KEY (fid_menu) REFERENCES menu(id_menu) ON UPDATE CASCADE ON DELETE CASCADE
+
+

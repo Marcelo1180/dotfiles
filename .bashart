@@ -12,22 +12,22 @@ white=$(tput setaf 15);
 yellow=$(tput setaf 178);
 
 pylogo=(
-"            .SSSSSSSSSS.            "
-"          .SS´´SSSSSSSSSS.          "
-"          SSS··SSSSSSSSSSS          "
-"          ´´´´´´´´SSSSSSSS          "
-"    .SSSSSSSSSSSSSSSSSSSSS iiiii,   "
-" .SSSSSSSSSSSSSSSSSSSSSSSS iiiiiii. "
-" SSSSSSSSSSSSSSSSSSSSSSSSS iiiiiiii "
-" SSSSSSSSSSSSSSSSSSSSSSSSS iiiiiiii "
-" SSSSSSSS ,,,,,,,,,,,,,,,,,iiiiiiii "
-" SSSSSSSS iiiiiiiiiiiiiiiiiiiiiiiii "
-" ·SSSSSSS iiiiiiiiiiiiiiiiiiiiiiii· "
-"    ·SSSS iiiiiiiiiiiiiiiiiiiii·    "
-"          iiiiiiii,,,,,,,,          "
-"          iiiiiiiiiii··iii          "
-"          ·iiiiiiiiii,,ii·          "
-"            ·iiiiiiiiii·            "
+"           .SSSSSSSSSS.           "
+"         .SS´´SSSSSSSSSS.         "
+"         SSS··SSSSSSSSSSS         "
+"         ´´´´´´´´SSSSSSSS         "
+"    .SSSSSSSSSSSSSSSSSSSS iiii,   "
+" .SSSSSSSSSSSSSSSSSSSSSSS iiiiii. "
+" SSSSSSSSSSSSSSSSSSSSSSSS iiiiiii "
+" SSSSSSSSSSSSSSSSSSSSSSSS iiiiiii "
+" SSSSSSS ,,,,,,,,,,,,,,,,,iiiiiii "
+" SSSSSSS iiiiiiiiiiiiiiiiiiiiiiii "
+" ·SSSSSS iiiiiiiiiiiiiiiiiiiiiii· "
+"    ·SSS iiiiiiiiiiiiiiiiiiii·    "
+"         iiiiiiii,,,,,,,,         "
+"         iiiiiiiiiii··iii         "
+"         ·iiiiiiiiii,,ii·         "
+"           ·iiiiiiiiii·           "
 )
 
 function etiqueta {
