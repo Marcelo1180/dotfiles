@@ -50,6 +50,7 @@ def fzf():
 def neovim():
     sudo('rm -f /usr/local/bin/nvim')
     sudo('rm -fR /usr/local/bin/nvim/')
+    sudo('rm -fR ~/.config/nvim')
     sudo('pip install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort')
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
@@ -60,6 +61,8 @@ def neovim():
     with cd(DEPLOY_NVIM):
         run('sudo make CMAKE_BUILD_TYPE=RelWithDebInfo')
         run('sudo make install')
+        run('curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
         run('nvim +silent +VimEnter +PlugInstall +qall')
 
 def bootstrap():

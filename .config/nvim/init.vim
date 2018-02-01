@@ -24,8 +24,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" Plug 'dracula/vim'
 " Plug 'takac/vim-hardtime'
 " Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 "}}}
@@ -36,6 +39,7 @@ filetype plugin indent on                                                       
 let g:mapleader = ","                                                           "Change leader to a comma
 
 let g:onedark_terminal_italics = 1                                              "Enable italic font
+" let g:dracula_terminal_italics = 1                                              "Enable italic font
 
 set termguicolors
 set title                                                                       "change the terminal's title
@@ -72,8 +76,8 @@ set exrc                                                                        
 set secure                                                                      "Forbid autocmd in local vimrc
 
 syntax on                                                                       "turn on syntax highlighting
-
 silent! colorscheme onedark
+" silent! colorscheme dracula
 
 " }}}
 " ================ Turn Off Swap Files ============== {{{
@@ -126,6 +130,7 @@ let g:bold_highlight_groups = ['Function', 'Statement', 'Todo', 'CursorLineNr', 
 
 for group in g:bold_highlight_groups
   call onedark#extend_highlight(group, { 'gui': 'bold' })
+  " call dracula#extend_highlight(group, { 'gui': 'bold' })
 endfor
 
 " }}}
