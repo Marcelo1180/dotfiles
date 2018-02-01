@@ -43,6 +43,7 @@ def aplicaciones():
       locales-all')
 
 def fzf():
+    run('rm -fR %s' % DEPLOY_FZF)
     run('git clone https://github.com/junegunn/fzf.git %s' % DEPLOY_FZF)
     with cd(DEPLOY_FZF):
         run('bash install --all')
@@ -50,13 +51,13 @@ def fzf():
 def neovim():
     sudo('rm -f /usr/local/bin/nvim')
     sudo('rm -fR /usr/local/bin/nvim/')
-    sudo('rm -fR ~/.config/nvim')
+    run('rm -fR ~/.config/nvim')
     sudo('pip install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort')
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort mypy')
     run('mkdir -p ~/.config/nvim')
-    sudo('rm -fR %s' % DEPLOY_NVIM)
+    run('sudo rm -fR %s' % DEPLOY_NVIM)
     run('git clone https://github.com/neovim/neovim.git %s' % DEPLOY_NVIM)
     with cd(DEPLOY_NVIM):
         run('sudo make CMAKE_BUILD_TYPE=RelWithDebInfo')
@@ -70,6 +71,7 @@ def bootstrap():
         run('bash bootstrap.sh')
 
 def tmux():
+    run('rm -fR ~/.tmux/plugins/tpm')
     run('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
     run('tmux source ~/.tmux.conf')
 
