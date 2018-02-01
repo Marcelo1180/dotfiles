@@ -11,6 +11,8 @@ function doIt() {
         ln -sf $(pwd)/.config/nvim/init.vim ~/.config/nvim/init.vim
         ln -sf $(pwd)/.config/nvim/snippets ~/.config/nvim/snippets
         ;;
+      .gitignore)
+        ;;
       *)
         ln -sf $(pwd)/$f ~/$f
         ;;
