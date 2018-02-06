@@ -13,6 +13,8 @@ function doIt() {
         ;;
       .gitignore)
         ;;
+      .git)
+        ;;
       *)
         ln -sf $(pwd)/$f ~/$f
         ;;
