@@ -1,0 +1,11 @@
+fabfile	fabfile-module.html
+fabfile.neovim	fabfile-module.html#neovim
+fabfile.DEPLOY_NVIM	fabfile-module.html#DEPLOY_NVIM
+fabfile.DEPLOY_FZF	fabfile-module.html#DEPLOY_FZF
+fabfile.bootstrap	fabfile-module.html#bootstrap
+fabfile.tmux	fabfile-module.html#tmux
+fabfile.__package__	fabfile-module.html#__package__
+fabfile.install	fabfile-module.html#install
+fabfile.aplicaciones	fabfile-module.html#aplicaciones
+fabfile.DEPLOY_PATH	fabfile-module.html#DEPLOY_PATH
+fabfile.fzf	fabfile-module.html#fzf
