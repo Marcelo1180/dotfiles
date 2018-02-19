@@ -29,6 +29,8 @@ Plug 'junegunn/fzf.vim'
 " Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'easymotion/vim-easymotion'
+" Plug 'dhruvasagar/vim-zoom'
 
 call plug#end()
 "}}}
@@ -331,6 +333,29 @@ nnoremap <F3> :Ag TODO<CR>
 " Buscar tareas pendientes
 nnoremap <F4> :!npm run lint<CR>
 nnoremap <F5> :!npm run lint -- --fix<CR>
+
+
+" EasyMotion configuracion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+" nmap s <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+map <A-t> :tabnew<CR>
+map <1> :tabnew<CR>
+map <2> :tabnew<CR>
+
 " }}}
 " ===========ç===== Plugins setups ======================== {{{
 

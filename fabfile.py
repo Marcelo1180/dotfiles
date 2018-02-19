@@ -96,16 +96,15 @@ def neovim():
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort mypy')
     run('mkdir -p ~/.config/nvim')
-    sudo('rm -fR %s' % DEPLOY_NVIM, user=env.user)
+    run('sudo rm -fR %s' % DEPLOY_NVIM)
     run('git clone https://github.com/neovim/neovim.git %s' % DEPLOY_NVIM)
     with cd(DEPLOY_NVIM):
         # run('sudo make CMAKE_BUILD_TYPE=RelWithDebInfo')
         # run('sudo make install')
         sudo('make CMAKE_BUILD_TYPE=RelWithDebInfo', user=env.user)
-        sudo('make install', user=env.user)
+        run('sudo make install')
         run('curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com \
-            /junegunn/vim-plug/master/plug.vim')
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
         run('nvim +silent +VimEnter +PlugInstall +qall')
 
 
@@ -117,7 +116,7 @@ def bootstrap():
 def tmux():
     run('rm -fR ~/.tmux/plugins/tpm')
     run('git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm')
-    run('tmux source ~/.tmux.conf')
+    # run('tmux source ~/.tmux.conf')
 
 
 @task
