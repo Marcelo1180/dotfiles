@@ -24,13 +24,17 @@ Plug 'vimwiki/vimwiki'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'dracula/vim'
+Plug 'dracula/vim'
 " Plug 'takac/vim-hardtime'
 " Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'                                                "Moverse con teclas en la pantalla
 " Plug 'dhruvasagar/vim-zoom'
+" Plug 'cocopon/iceberg.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
 call plug#end()
 "}}}
@@ -40,7 +44,7 @@ filetype plugin indent on                                                       
 
 let g:mapleader = ","                                                           "Change leader to a comma
 
-let g:onedark_terminal_italics = 1                                              "Enable italic font
+" let g:onedark_terminal_italics = 1                                              "Enable italic font
 " let g:dracula_terminal_italics = 1                                              "Enable italic font
 
 set termguicolors
@@ -80,6 +84,7 @@ set secure                                                                      
 syntax on                                                                       "turn on syntax highlighting
 silent! colorscheme onedark
 " silent! colorscheme dracula
+" silent! colorscheme iceberg
 
 " }}}
 " ================ Turn Off Swap Files ============== {{{
@@ -127,13 +132,12 @@ autocmd vimrc FocusGained,BufEnter * checktime                                  
 
 " }}}
 " ================ Colorscheme setup ================ {{{
+" let g:bold_highlight_groups = ['Function', 'Statement', 'Todo', 'CursorLineNr', 'MatchParen', 'StatusLine']
 
-let g:bold_highlight_groups = ['Function', 'Statement', 'Todo', 'CursorLineNr', 'MatchParen', 'StatusLine']
-
-for group in g:bold_highlight_groups
-  call onedark#extend_highlight(group, { 'gui': 'bold' })
-  " call dracula#extend_highlight(group, { 'gui': 'bold' })
-endfor
+" for group in g:bold_highlight_groups
+"   call onedark#extend_highlight(group, { 'gui': 'bold' })
+"   " call dracula#extend_highlight(group, { 'gui': 'bold' })
+" endfor
 
 " }}}
 " ================ Completion ======================= {{{
@@ -356,6 +360,14 @@ map <A-t> :tabnew<CR>
 map <1> :tabnew<CR>
 map <2> :tabnew<CR>
 
+nmap <Leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
 " }}}
 " ===========ç===== Plugins setups ======================== {{{
 
@@ -389,7 +401,7 @@ let g:ale_sign_warning = '⚠'                                                  
 let g:ale_statusline_format =[' %d E ', ' %d W ', '']                           "Status line texts
 
 let g:jsx_ext_required = 1                                                      "Force jsx extension for jsx filetype
-let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
+" let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
 
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]                            "Use dropbox folder for easier syncing of wiki
 
