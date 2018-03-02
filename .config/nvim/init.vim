@@ -1,3 +1,7 @@
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+syntax enable
+
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
 
@@ -25,6 +29,8 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dracula/vim'
+Plug 'challenger-deep-theme/vim'
+Plug 'jacoborus/tender.vim'
 " Plug 'takac/vim-hardtime'
 " Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
 Plug 'vim-airline/vim-airline'
@@ -32,8 +38,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'                                                "Moverse con teclas en la pantalla
 " Plug 'dhruvasagar/vim-zoom'
 " Plug 'cocopon/iceberg.vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
 Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
 call plug#end()
@@ -82,9 +88,11 @@ set exrc                                                                        
 set secure                                                                      "Forbid autocmd in local vimrc
 
 syntax on                                                                       "turn on syntax highlighting
-silent! colorscheme onedark
+" silent! colorscheme onedark
 " silent! colorscheme dracula
 " silent! colorscheme iceberg
+" silent! colorscheme challenger_deep
+silent! colorscheme tender
 
 " }}}
 " ================ Turn Off Swap Files ============== {{{
@@ -338,6 +346,8 @@ nnoremap <F3> :Ag TODO<CR>
 nnoremap <F4> :!npm run lint<CR>
 nnoremap <F5> :!npm run lint -- --fix<CR>
 
+" Guardar y Salir
+nnoremap <F8> :x!<CR>
 
 " EasyMotion configuracion
 " <Leader>f{char} to move to {char}

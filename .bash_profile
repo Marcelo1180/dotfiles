@@ -5,6 +5,8 @@
 . ~/.bashrc
 # Definir paleta de colores
 export TERM=xterm-256color
+export VISUAL=nvim
+export EDITOR=nvim
 # set fish_greeting "fff"; echo $fish_greeting; fish
 # Cargar funciones, alias
 for file in ~/.{aliases,functions}; do
