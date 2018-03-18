@@ -94,10 +94,11 @@ def neovim():
     sudo('rm -fR /usr/local/bin/nvim/')
     run('rm -fR ~/.config/nvim')
     sudo('pip install neovim jedi flake8 flake8-docstrings flake8-isort \
-         flake8-quotes pep8-naming pep257 isort httpie-jwt-auth')
+         flake8-quotes pep8-naming pep257 isort')
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort mypy')
     sudo('sudo npm install -g neovim')
+    sudo('sudo pip install httpie-jwt-auth')
     run('mkdir -p ~/.config/nvim')
     run('sudo rm -fR %s' % DEPLOY_NVIM)
     run('git clone https://github.com/neovim/neovim.git %s' % DEPLOY_NVIM)
