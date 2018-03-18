@@ -77,6 +77,7 @@ def aplicaciones():
       ctags \
       sqlite3 \
       silversearcher-ag \
+      httpie \
       locales \
       locales-all')
 
@@ -93,7 +94,7 @@ def neovim():
     sudo('rm -fR /usr/local/bin/nvim/')
     run('rm -fR ~/.config/nvim')
     sudo('pip install neovim jedi flake8 flake8-docstrings flake8-isort \
-         flake8-quotes pep8-naming pep257 isort')
+         flake8-quotes pep8-naming pep257 isort httpie-jwt-auth')
     sudo('pip3 install neovim jedi flake8 flake8-docstrings flake8-isort \
          flake8-quotes pep8-naming pep257 isort mypy')
     sudo('sudo npm install -g neovim')
