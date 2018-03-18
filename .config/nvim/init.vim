@@ -41,6 +41,7 @@ Plug 'easymotion/vim-easymotion'                                                
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-easytags'
 Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 "}}}
