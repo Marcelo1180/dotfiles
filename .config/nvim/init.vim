@@ -7,30 +7,33 @@ call plug#begin( '~/.config/nvim/bundle')
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'Raimondi/delimitMate'
+" Plug 'nelstrom/vim-visual-star-search'
+" Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+" Plug 'tyru/caw.vim'
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
-Plug 'airblade/vim-gitgutter'
-Plug 'duff/vim-bufonly'
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
+" Plug 'airblade/vim-gitgutter'
+" Plug 'duff/vim-bufonly'
+" Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'dyng/ctrlsf.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'dracula/vim'
-Plug 'challenger-deep-theme/vim'
+" Plug 'dracula/vim'
+" Plug 'challenger-deep-theme/vim'
 Plug 'jacoborus/tender.vim'
+Plug 'posva/vim-vue'
 " Plug 'takac/vim-hardtime'
 " Plug 'Galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
 Plug 'vim-airline/vim-airline'
@@ -40,7 +43,7 @@ Plug 'easymotion/vim-easymotion'                                                
 " Plug 'cocopon/iceberg.vim'
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-easytags'
-Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
+" Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
 call plug#end()
 "}}}
@@ -137,6 +140,7 @@ autocmd vimrc InsertEnter * :set nocul                                          
 autocmd vimrc InsertLeave * :set cul | NeoSnippetClearMarkers                   "Add cursorline highlight in normal mode and remove snippet markers
 autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
 autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " }}}
 " ================ Colorscheme setup ================ {{{
