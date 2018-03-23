@@ -114,9 +114,13 @@ set undofile
 " ================ Indentation ====================== {{{
 " https://wiki.python.org/moin/Vim
 " set textwidth=120
-set shiftwidth=4
-set softtabstop=4
-set tabstop=8
+" set shiftwidth=4
+" set softtabstop=4
+" set tabstop=8
+" Es mejor esta indentacion de 2 es requerido por varios linters
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set expandtab
 set smartindent
 set nofoldenable
