@@ -15,9 +15,9 @@ fab -H localhost install
 
 edit ~/.bashrc
 ```bash
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux
+if command -v tmux>/dev/null; then
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 fi
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 bash ~/.bashart
 ```
