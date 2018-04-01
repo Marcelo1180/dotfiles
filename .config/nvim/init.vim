@@ -1,6 +1,5 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax enable
-" TODO: Hacer este commando que se ejecuten los dos
 
 " ================ Plugins ==================== {{{
 call plug#begin( '~/.config/nvim/bundle')
@@ -16,6 +15,7 @@ Plug 'inkarkat/vim-SyntaxRange'                                                 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
 Plug 'easymotion/vim-easymotion'                                                "Moverse con teclas en la pantalla
+Plug 'Shougo/neosnippet'
 " Tema
 Plug 'mhartington/oceanic-next'
 " Visual
@@ -164,6 +164,17 @@ endfunction
 function! DemoPython()
   pyfile ~/.dotfiles/demo.py
 endfunction
+
+" Expand snippets on tab if snippets exists, otherwise do autocompletion
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\ : pumvisible() ? "\<C-n>" : "\<TAB>"
+" If popup window is visible do autocompletion from back
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Fix for jumping over placeholders for neosnippet
+smap <expr><TAB> neosnippet#jumpable() ?
+\ "\<Plug>(neosnippet_jump)"
+\: "\<TAB>"
 
 " }}}
 " ================ Custom mappings ======================== {{{
@@ -320,8 +331,9 @@ call NERDTreeHighlightFile('md', 'LightCyan')
 let g:multi_cursor_next_key='f'                                                 "Tecla para crear multiples cursores
 let g:multi_cursor_skip_key='F'
 
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
+let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
+
 " }}}
 " vim:foldenable:foldmethod=marker
 " hi Normal guibg=NONE ctermbg=NONE
-" hi Normal guibg=blackblue ctermbg=black
-" hi Normal guibg=#1D2B35
