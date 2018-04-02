@@ -1,5 +1,18 @@
-snippet cl
-    console.log(${0});
+# vim: set ts=2 sts=2 sw=2 ft=javascript:
+
+snippet co
+  console.log('X+=-----------------------------------------=+X');
+  console.log(${0});
+  console.log('X+=-----------------------------------------=+X');
+
+snippet le
+  let ${1} = ${0};
+
+snippet ar 
+  ${1:methodName}(${2:args}) => {
+    ${0}
+  }
+
 snippet iife
     (function(${2}) {
         ${0}
