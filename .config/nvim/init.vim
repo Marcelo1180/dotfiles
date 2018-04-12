@@ -98,6 +98,7 @@ augroup END
 
 autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
 autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " }}}
 " ================ Colorscheme setup ================ {{{
@@ -167,7 +168,7 @@ function! DemoPython()
   pyfile ~/.dotfiles/demo.py
 endfunction
 
-" Expand snippets on tab if snippets exists, otherwise do autocompletion
+" Autocompletado para neosnippet
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \ : pumvisible() ? "\<C-n>" : "\<TAB>"
