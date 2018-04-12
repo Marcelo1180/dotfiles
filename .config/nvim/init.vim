@@ -32,6 +32,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 " Others
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
+" Plug '/home/marcelo/MARCELO/CODE/VIMPLUGINS/demoplugin/plugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
 call plug#end()
@@ -57,7 +58,8 @@ set mouse=a                                                                     
 set showmatch                                                                   "Highlight matching bracket
 set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate
 set inccommand=split                                                            "Show substitute changes immidiately in separate split
-
+set splitright                                                                  "Set up new vertical splits positions
+set splitbelow                                                                  "Set up new horizontal splits positions
 syntax on                                                                       "turn on syntax highlighting
 
 " }}}
