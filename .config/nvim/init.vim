@@ -32,7 +32,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 " Others
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
-Plug 'suan/vim-instant-markdown'
+" Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
 " TODO: quiero un plugin que haga un find and replace tipo el %s/ que
@@ -51,10 +51,11 @@ call plug#end()
 filetype plugin indent on                                                       "Enable plugins and indents by filetype
 
 let g:mapleader = ","                                                           "Change leader to a comma
+let g:plug_shallow = 0
 
 set termguicolors
 set title                                                                       "change the terminal's title
-set number                                                                      "Line numbers are good
+smarceloet number                                                                      "Line numbers are good
 set relativenumber                                                              "Show numbers relative to current line
 set history=500                                                                 "Store lots of :cmdline history
 set fileencoding=utf-8                                                          "Set utf-8 encoding on write
@@ -68,7 +69,8 @@ set mouse=a                                                                     
 set showmatch                                                                   "Highlight matching bracket
 set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate
 set inccommand=split                                                            "Show substitute changes immidiately in separate split
-
+set splitright                                                                  "Set up new vertical splits positions
+set splitbelow                                                                  "Set up new horizontal splits positions
 syntax on                                                                       "turn on syntax highlighting
 
 " }}}
