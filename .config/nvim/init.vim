@@ -55,7 +55,7 @@ let g:plug_shallow = 0
 
 set termguicolors
 set title                                                                       "change the terminal's title
-smarceloet number                                                                      "Line numbers are good
+set number                                                                      "Line numbers are good
 set relativenumber                                                              "Show numbers relative to current line
 set history=500                                                                 "Store lots of :cmdline history
 set fileencoding=utf-8                                                          "Set utf-8 encoding on write
