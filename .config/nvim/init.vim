@@ -32,6 +32,9 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 " Others
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
+
+Plug 'jaxbot/browserlink.vim'
+
 " Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
@@ -101,6 +104,8 @@ autocmd Filetype javascript set softtabstop=2
 autocmd Filetype javascript set sw=2
 autocmd Filetype javascript set ts=2
 
+" syntax region markdownBlock matchgroup=Comment start=/^\/\/{{{$/ end=/^\/\/}}}$/ contains=@Markdown
+" syn match celString start="//inicio" end="//fin" contains=bufok,buferr 
 " }}}
 " ================ Auto commands ====================== {{{
 augroup vimrc
@@ -364,4 +369,4 @@ let test#javascript#ava#options = '--verbose'
 
 " }}}
 " vim:foldenable:foldmethod=marker
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
