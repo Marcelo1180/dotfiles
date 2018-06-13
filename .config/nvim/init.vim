@@ -339,4 +339,4 @@ let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               
 
 " }}}
 " vim:foldenable:foldmethod=marker
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
