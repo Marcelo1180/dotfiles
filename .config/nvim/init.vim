@@ -33,7 +33,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
 
-Plug 'jaxbot/browserlink.vim'
+Plug 'jaxbot/browserlink.vim'                                                   " Instalar su TamperMonkey y copiar el script de la pagina despues levanta con python la pagina web
 
 " Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
