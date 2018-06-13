@@ -32,8 +32,21 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 " Others
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
-" Plug '/home/marcelo/MARCELO/CODE/VIMPLUGINS/demoplugin/plugin'
+
+Plug 'jaxbot/browserlink.vim'
+
+" Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
+
+" TODO: quiero un plugin que haga un find and replace tipo el %s/ que
+" previsualize la expresion regular antes de reemplazar un preview en todos
+" los archivos, este comando hace eso pero quiero que previsualize
+" http://vim.wikia.com/wiki/VimTip382
+" Suppose all *.cpp and *.h files in the current directory need to be changed (not subdirectories). One approach is to use the argument list (arglist):
+" :arg *.cpp	All *.cpp files in current directory.
+" :argadd *.h	And all *.h files.
+" :arg	Optional: Display the current arglist.
+" :argdo %s/pattern/replace/ge | update
 
 call plug#end()
 "}}}
@@ -41,6 +54,7 @@ call plug#end()
 filetype plugin indent on                                                       "Enable plugins and indents by filetype
 
 let g:mapleader = ","                                                           "Change leader to a comma
+let g:plug_shallow = 0
 
 set termguicolors
 set title                                                                       "change the terminal's title
@@ -90,6 +104,8 @@ autocmd Filetype javascript set softtabstop=2
 autocmd Filetype javascript set sw=2
 autocmd Filetype javascript set ts=2
 
+" syntax region markdownBlock matchgroup=Comment start=/^\/\/{{{$/ end=/^\/\/}}}$/ contains=@Markdown
+" syn match celString start="//inicio" end="//fin" contains=bufok,buferr 
 " }}}
 " ================ Auto commands ====================== {{{
 augroup vimrc
@@ -200,6 +216,13 @@ nnoremap <Leader>q :lclose<CR>
 
 " Corregir errores de ALEFix
 nnoremap <Leader>he :ALEFix<CR>
+
+" Tecla para activar los test
+nmap <silent> tt :TestNearest<CR>
+nmap <silent> tf :TestFile<CR>
+nmap <silent> ts :TestSuite<CR>
+nmap <silent> tl :TestLast<CR>
+nmap <silent> tg :TestVisit<CR>
 
 " Map save to Ctrl + S
 map <c-s> :w<CR>
@@ -336,6 +359,13 @@ let g:multi_cursor_skip_key='F'
 
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
+
+let test#javascript#ava#options = '--verbose'
+" let test#ruby#rspec#options = {
+"   'nearest': '--backtrace',
+"   'file':    '--format documentation',
+"   'suite':   '--tag ~slow',
+" }
 
 " }}}
 " vim:foldenable:foldmethod=marker
