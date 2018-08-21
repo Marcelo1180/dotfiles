@@ -168,7 +168,8 @@ cnoreabbrev t tabe
 " }}}
 " ================ Functions ======================== {{{
 " Creando nuevo tipo de archivo para una extension vue
-autocmd BufRead,BufNewFile *.vue set filetype=vue                               " .config/nvim/syntax/vue/Syntax.Include.vim
+" autocmd BufRead,BufNewFile *.vue set filetype=vue                               " .config/nvim/syntax/vue/Syntax.Include.vim
+autocmd BufRead,BufNewFile *.vue set filetype=html
 
 function! NERDTreeHighlightFile(extension, fg)                                  " NERDTrees File highlighting color
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s.*\.\('. substitute(a:extension,'_','\\|','') .'\)$#'
