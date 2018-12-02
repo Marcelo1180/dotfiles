@@ -56,7 +56,8 @@ filetype plugin indent on                                                       
 let g:mapleader = ","                                                           "Change leader to a comma
 let g:plug_shallow = 0
 
-set termguicolors
+" set termguicolors                                                             "no urxvt
+set t_Co=256                                                                    "con urxvt
 set title                                                                       "change the terminal's title
 set number                                                                      "Line numbers are good
 set relativenumber                                                              "Show numbers relative to current line
