@@ -8,7 +8,8 @@ function doIt() {
   for f in $(ls .[^.]* -1da --ignore={".","..",".git",".DS_Store",".osx"}); do
     case "$f" in
       .config)
-	mkdir -p ~/.config/nvim
+	      rm -fr ~/.config/nvim
+	      mkdir -p ~/.config/nvim
         ln -sf $(pwd)/.config/nvim/init.vim ~/.config/nvim/init.vim
         ln -sf $(pwd)/.config/nvim/snippets ~/.config/nvim/snippets
         ;;
@@ -17,11 +18,12 @@ function doIt() {
       .git)
         ;;
       *)
+        rm -fr ~/$f
         ln -sf $(pwd)/$f ~/$f
         ;;
     esac
   done
-  source ~/.bash_profile;
+  #source ~/.bash_profile;
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
