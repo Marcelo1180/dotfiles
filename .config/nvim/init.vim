@@ -35,6 +35,8 @@ Plug 'janko-m/vim-test'
 
 Plug 'jaxbot/browserlink.vim'                                                   " Instalar su TamperMonkey y copiar el script de la pagina despues levanta con python la pagina web
 
+Plug 'diepm/vim-rest-console'
+
 " Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
 " Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 
