@@ -189,3 +189,5 @@
 
 ; ; [gpg]
 ; ; 	program = gpg2
+[merge]
+	tool = meld
