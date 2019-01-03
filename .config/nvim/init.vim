@@ -5,8 +5,8 @@ syntax enable
 call plug#begin( '~/.config/nvim/bundle')
 
 " Base
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree'                                                      " Navegador de directorios
+Plug 'Xuyuanp/nerdtree-git-plugin'                                              " Mostrar estados en nerdtree
 Plug 'Shougo/deoplete.nvim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -33,7 +33,12 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'vimwiki/vimwiki'
 Plug 'janko-m/vim-test'
 
-Plug 'jaxbot/browserlink.vim'                                                   " Instalar su TamperMonkey y copiar el script de la pagina despues levanta con python la pagina web
+" Analizar este plugin no funciona con python3 y el autor ya no lo actualiza
+" desde enero, talvez evaluar cambiarlo
+" Plug 'jaxbot/browserlink.v,m'                                                   " Instalar su TamperMonkey y copiar el script de la pagina despues levanta con python la pagina web,
+
+Plug 'diepm/vim-rest-console'
+Plug 'aklt/plantuml-syntax'
 
 Plug 'diepm/vim-rest-console'
 Plug 'tyru/open-browser.vim'
@@ -115,13 +120,30 @@ autocmd Filetype javascript set ts=2
 " syn match celString start="//inicio" end="//fin" contains=bufok,buferr 
 " }}}
 " ================ Auto commands ====================== {{{
+
 augroup vimrc
   autocmd!
 augroup END
 
-autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
-autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
+" autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
+" autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+
+
+" se debe instalar node-plantuml y pacman -Sy jre-openjdk
+" npm install node-plantuml -g
+" autocmd BufRead,BufNewFile *.puml set filetype=plantuml
+function! PreviewUML()
+  execute "silent !feh --reload 0.1 /tmp/file.png"
+endfunction
+function! Synctex()
+  execute 'silent !puml generate '.@%.' -o /tmp/file.png' 
+endfunction
+autocmd FileType plantuml autocmd BufWritePost <buffer> call Synctex()
+
+autocmd FileType plantuml command! Preview call PreviewUML()
+autocmd FileType plantuml nnoremap<buffer> <Leader>T :call PreviewUML()
 
 " }}}
 " ================ Colorscheme setup ================ {{{
