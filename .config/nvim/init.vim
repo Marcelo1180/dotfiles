@@ -390,6 +390,15 @@ let g:multi_cursor_skip_key='F'
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
 
+" let b:vrc_response_default_content_type = 'application/json'
+" let s:vrc_auto_format_response_patterns = {'json': 'htop'}
+let g:vrc_show_command = 1                                                      "Mostrar curl en el buffer de salida de Rest Console
+"Para mostrar la salida en pretty format
+let g:vrc_curl_opts = {
+      \ '-i': '',
+    \}
+" let g:vrc_output_buffer_name = '__NEW_NAME__'
+
 let test#javascript#ava#options = '--verbose'
 " let test#ruby#rspec#options = {
 "   'nearest': '--backtrace',
