@@ -9,7 +9,10 @@ welcomemsg() {
 }
 
 aplicaciones() {
-	sudo pacman -Syu \
+  sudo apt update
+	sudo apt install \
+		blueman \
+		thunar \
 		git \
 		neovim xclip \
 		firefox \
@@ -27,6 +30,7 @@ dotfiles() {
 }
 
 neovim() {
+  sudo apt install neovim
   pip install neovim --user
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

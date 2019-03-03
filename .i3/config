@@ -3,7 +3,7 @@
 
 # Crop wallpapers online
 # https://www.befunky.com/create/crop-photo/
-exec --no-startup-id feh --bg-scale ~/Wallpaper/wall2.jpg
+exec --no-startup-id feh --bg-scale ~/Descargas/Wallpapers
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -25,7 +25,8 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font xft:URWGothic-Book 11
+# font pango:Noto Mono for Powerline 11
+font pango:Roboto Mono Light for Powerline 11
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -37,7 +38,8 @@ bindsym $mod+Return exec terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+#bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -334,7 +336,8 @@ bar {
 
 	bindsym button4 nop
 	bindsym button5 nop
-#   font xft:URWGothic-Book 11
+  # font xft:URWGothic-Book 11
+  # font xft:'Roboto Mono Light for Powerline' 11
 	# strip_workspace_numbers yes
 
     colors {

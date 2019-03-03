@@ -1,3 +1,7 @@
+*font:	Noto Mono for Powerline:pixelsize=12:antialias=true:autohint=true;
+! *alpha: 164
+! *color0: #111
+
 Xft.dpi:       96
 Xft.antialias: true
 Xft.hinting:   true
