@@ -47,9 +47,15 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
+# Audio pulseaudio controls
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.config/i3/config
+# https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
+bindsym XF86AudioRaiseVolume        exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume        exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute               exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+# exec --no-startup-id volumeicon
+# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -57,8 +63,8 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -148,14 +154,14 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 "1: Code "
-set $ws2 "2: Code "
-set $ws3 "3: Code "
-set $ws4 "4: Labo "
-set $ws5 "5: Web "
-set $ws6 "6: Web "
-set $ws7 "7: Play "
-set $ws8 "8: Chat "
+set $ws1 "1: Code 🔰"
+set $ws2 "2: Code 🔰"
+set $ws3 "3: Code 🔰"
+set $ws4 "4: Labo 🃏"
+set $ws5 "5: Web 🌎"
+set $ws6 "6: Web 🌎"
+set $ws7 "7: Play 📺"
+set $ws8 "8: Chat 💬"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
