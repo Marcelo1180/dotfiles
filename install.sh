@@ -67,6 +67,7 @@ aplicaciones() {
 		blueman \
 		thunar \
 		ranger \
+		feh \
 		git \
 		tree \
 		neovim xclip \
