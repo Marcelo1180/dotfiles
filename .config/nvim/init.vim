@@ -393,6 +393,8 @@ let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               
 " let b:vrc_response_default_content_type = 'application/json'
 " let s:vrc_auto_format_response_patterns = {'json': 'htop'}
 let g:vrc_show_command = 1                                                      "Mostrar curl en el buffer de salida de Rest Console
+let g:vrc_horizontal_split = 1                                                      "Mostrar curl en el buffer de salida de Rest Console
+
 "Para mostrar la salida en pretty format
 let g:vrc_curl_opts = {
       \ '-i': '',
