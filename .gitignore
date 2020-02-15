@@ -103,3 +103,7 @@ db.sqlite3
 .idea
 settings.json
 /media/
+
+# bundle nvim
+.config/nvim/bundle
+.config/nvim/backups
