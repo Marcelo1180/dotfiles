@@ -1,123 +1,120 @@
 #!/bin/bash
 #
 # by Marcelo Arteaga <artegamarcelo@gmail.com>
-# License: GNU GPLv3
+# License: MIT
 #
-# Connect bluetooth by terminal
-# https://antergos.com/wiki/es/hardware/bluetooth/get-bluetooth-headphone-auto-connected-with-a2dp/
-# bluetoothctl
-# power on
-# agent on
-# default-agent
-# scan on
-# pair XX:XX:XX:XX:XX:XX < your headphones "ID"
-# trust XX:XX:XX:XX:XX:XX
-# connect XX:XX:XX:XX:XX:XX
-# scan off
-# exit
 
-welcomemsg() {
-	echo "BIENVENIDO"
+clear
+
+# List of brew apps by repo
+# CLI
+FORMULAE=(
+  ansible
+  ffmpeg
+  fzf
+  htop
+  git-flow
+  pipenv
+  tmux
+  vim
+)
+
+# UI
+CASKS=(
+  alfred
+  balenaetcher
+  blender
+  calibre
+  dbeaver-community
+  docker
+  font-hack-nerd-font
+  iterm2
+  meld
+  notion
+  postman
+  rescuetime
+  slack
+  spark
+  spotify
+  telegram
+  the-unarchiver
+  ultimaker-cura
+  virtualbox
+  vnc-viewer
+  zoom
+  zotero
+)
+
+# Prints warning/error $MESSAGE in red foreground color
+err_echo() {
+    echo -e "\x1b[1;31m [ ] $MESSAGE"
 }
 
-i3() {
-  sudo apt update
-	sudo apt install \
-		i3 \
-		git \
-		libxcb-shape0-dev
-	sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
-	cd /tmp
-	git clone https://www.github.com/Airblader/i3 i3-gaps
-	cd i3-gaps
-	autoreconf --force --install
-	rm -rf build/
-	mkdir -p build && cd build/
-	../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-	make
-	sudo make install
+ok_echo() {
+    echo -e "\x1b[1;32m [*] $MESSAGE"
 }
 
-st() {
-	cd /tmp
-	git clone https://github.com/LukeSmithxyz/st
-	cd st
-	make
-	sudo make install
+info_echo() {
+    echo -e "\x1b[1;34m$MESSAGE"
 }
 
-nvidia_drivers() {
-  sudo add-apt-repository ppa:graphics-drivers/ppa
-  sudo apt update
-  sudo apt upgrade
-	sudo apt install nvidia-387
+warn_echo() {
+    echo -e "\x1b[1;33m$MESSAGE"
 }
 
-fonts() {
-	cd /tmp
-  git clone https://github.com/powerline/fonts.git --depth=1
-	cd fonts
-	./install.sh
+title_echo() {
+    echo -e "\x1b[1;36m$MESSAGE"
 }
 
-aplicaciones() {
-  sudo add-apt-repository ppa:neovim-ppa/stable
-  sudo apt update
-	sudo apt install \
-		blueman \
-		thunar \
-		ranger \
-		feh \
-		git \
-		tree \
-		neovim xclip \
-		firefox \
-		mpv \
-		zathura \
-		python-pip \
-		feh
+function linkFile() {
+  MESSAGE=$f
+  # rm -fr ~/$f && ln -sf $(pwd)/$f ~/$f && ok_echo || err_echo
+  ok_echo || err_echo
 }
 
-dotfiles() {
-	cd $HOME
-	#git clone https://github.com/Marcelo1180/dotfiles .dotfiles
-	cd $HOME/.dotfiles
-	bash bootstrap.sh
+# Link dotfiles to specific directory
+# ls list all file, first awk filter files that begins with dot and
+# the second exclude some kinds of files
+function lnDotFiles() {
+  for f in $(ls -1a | awk '/^\./' | awk '!/^.$|^..$|^.git$|^.gitignore$/'); do
+    case "$f" in
+      .config)
+        f='.config/vim' ; linkFile
+        ;;
+      *)
+        linkFile
+        ;;
+    esac
+  done
 }
 
-neovim() {
-  sudo apt install neovim
-  pip install neovim --user
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	nvim +silent +VimEnter +PlugInstall +qall
+# Main interface
+function main(){
+  echo "Name    : Juan Marcelo Arteaga Gutierrez"
+  echo "Version : 0.1.0"
+  echo
+  MESSAGE=".dotfiles CLI installer" ; title_echo
+  echo
+  echo
+  MESSAGE="Config files" ; title_echo
+  lnDotFiles
+  echo
+  MESSAGE="Install Brew CLI Apps" ; title_echo
+  echo
+  # brew install ${CASKS[@]} --cask
+  echo
+  MESSAGE="Install Brew UI Apps" ; title_echo
+  echo
+  # brew install ${CASKS[@]} --cask
 }
 
-VERSION="5.0.56"
-if [ `uname -m` == "x86_64" ]; then
-	ARCH="x86_64"
+# Ask actions
+if [ "$1" == "--force" -o "$1" == "-f" ]; then
+	main;
 else
-	ARCH="i686"
-fi
-TMP="/tmp/zotero.tar.bz2"
-DEST_FOLDER=zotero
-EXEC=zotero
-
-echo ">>> This script will download and install Developer DOTFILES on your system."
-echo ">>> Do you want to continue?"
-echo ">>> y/n (default=y)"
-read INPUT
-if [ "$INPUT" = "n" ]; then
-	echo ">>> Aborting installation"
-	exit 0
-fi
-
-welcomemsg
-aplicaciones
-dotfiles
-neovim
-
-# Firefox
-# tridactyl
-# https://github.com/tridactyl/tridactyl
-# https://tridactyl.cmcaine.co.uk/betas/tridactyl-latest.xpi
+	read -p "Esto va a sobreescribir archivos en tu directorio home. ¿Estás seguro? (y/n) " -n 1;
+	echo "";
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		main;
+	fi;
+fi;

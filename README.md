@@ -1,23 +1,43 @@
 # Marcelo1180 dotfiles
 
+## Requirements
+- MacOsX Big Sur
+- Homebrew
+
 ## Installation
 
-### Using Git and the bootstrap script
-
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/.dotfiles`, with `~/.dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
-
+You need to clone the repository at home (~)
 ```bash
-sudo apt-get install fabric openssh-server python-pip
-sudo pip install fabric
-git clone https://github.com/Marcelo1180/dotfiles.git ~/.dotfiles
-fab -H localhost install
+git clone git@github.com:Marcelo1180/dotfiles.git ~/.dotfiles
 ```
 
-edit ~/.bashrc
+Run installer
 ```bash
-if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-bash ~/.bashart
+cd ~/.dotfiles
+chmod +x install.sh
+./install.sh
 ```
+
+## License
+
+MIT License
+
+    Copyright (c) 2021 Marcelo1180
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
