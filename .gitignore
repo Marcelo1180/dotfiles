@@ -3,9 +3,9 @@
 .ssh
 
 
-# vim
-.config/vim/backups
-.config/vim/bundle
+# nvim
+.config/nvim/backups/
+.config/nvim/bundle/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
