@@ -1,8 +1,10 @@
+alias nube='cd /Users/marcelo/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias ss='ssh **'
 alias ll='ls -la'
 alias tt='python manage.py test'
 alias rr='python manage.py runserver 0.0.0.0:8000'
 
+alias vv='nvim .'
 # Git
 alias gb='git branch'
 alias gp='git push origin'

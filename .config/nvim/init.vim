@@ -1,4 +1,4 @@
-"
+  "
 " __   _(_)_ __ ___  _ __ ___ 
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__ 
@@ -10,12 +10,7 @@ let g:mapleader = ","                                                           
 
 "# Sets {{{
 set encoding=UTF-8
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax enable
-set backspace=indent,eol,start                                                  " Enabling button delete in brew - vim MacOSX 
-set timeoutlen=1000 ttimeoutlen=0                                               " Solving problem delay on button ESC - vim MacOSX
-set hlsearch
-
 
 "}}}
 "# Plugins {{{
@@ -23,15 +18,11 @@ call plug#begin( '~/.config/nvim/bundle')
 " Base
 Plug 'scrooloose/nerdtree'                                                      " Navegador de directorios
 Plug 'Xuyuanp/nerdtree-git-plugin'                                              " Mostrar estados en nerdtree
-Plug 'markonm/traces.vim'                                                       " Preview replace substitucion in vim
-Plug 'haya14busa/incsearch.vim'                                                 " Highlight on search vim
 Plug 'tomtom/tcomment_vim'                                                      " Comentar codigo
 Plug 'cohama/lexima.vim'                                                        " Auto cerrar (, {
 Plug 'alvan/vim-closetag'                                                       " Auto cerrar html
 Plug 'christoomey/vim-tmux-navigator'
 " Autocomplete
-Plug 'roxma/vim-hug-neovim-rpc'                                                 " Requirement to deoplete
-Plug 'roxma/nvim-yarp'                                                          " Requirement to deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }            " Emmet for vim
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }                       " tabnine IA Productivity if dont work, force install ./install.sh
@@ -62,9 +53,7 @@ call plug#end()
 "# General Config {{{
 filetype plugin indent on                                                       "Enable plugins and indents by filetype
 let g:plug_shallow = 0
-" set termguicolors                                                             "no urxvt
 set t_Co=256                                                                    "con urxvt
-" set title                                                                       "change the terminal's title
 set number                                                                      "Line numbers are good
 set relativenumber                                                              "Show numbers relative to current line
 set history=500                                                                 "Store lots of :cmdline history
@@ -78,7 +67,6 @@ set cursorline                                                                  
 set mouse=a                                                                     "Enable mouse usage
 set showmatch                                                                   "Highlight matching bracket
 set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate
-" set inccommand=split                                                            "Show substitute changes immidiately in separate split
 set splitright                                                                  "Set up new vertical splits positions
 set splitbelow                                                                  "Set up new horizontal splits positions
 syntax on                                                                       "turn on syntax highlighting
@@ -190,14 +178,7 @@ cnoreabbrev t tabe
 " }}}
 "# Functions {{{
 " Creando nuevo tipo de archivo para una extension vue
-" autocmd BufRead,BufNewFile *.vue set filetype=vue                               " .config/nvim/syntax/vue/Syntax.Include.vim
 autocmd BufRead,BufNewFile *.vue set filetype=html
-
-" function! NERDTreeHighlightFile(extension, fg)                                  " NERDTrees File highlighting color
-"   exec 'autocmd filetype nerdtree syn match '. a:extension .' #^\s.*\.\('. substitute(a:extension,'_','\\|','') .'\)$#'
-"   " exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg=none ctermfg='. a:fg .' guibg=none guifg='. a:fg
-"   exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg=black ctermfg='. a:fg .' guibg=red guifg='. a:fg
-" endfunction
 
 function! AutoRetabSpaces()
   exec 'set expandtab'
@@ -270,7 +251,7 @@ smap <expr><TAB> neosnippet#jumpable() ?
 
 " }}}
 
-nmap <Leader>` :new ~/.config/vim/doc/demo.txt \| set nomodifiable<CR>
+" nmap <Leader>` :new ~/.config/vim/doc/demo.txt \| set nomodifiable<CR>
 
 "# Custom mappings {{{
 noremap <Leader>r :so %<CR>
@@ -315,10 +296,6 @@ nnoremap <Leader>v <C-w>v
 " Down is really the next line
 " nnoremap j gj
 " nnoremap k gk
-
-" Map for Escape key
-" inoremap jj <Esc>
-" tnoremap <Leader>jj <C-\><C-n>
 
 " Copiar hasta el final de la linea
 nnoremap Y y$
@@ -376,11 +353,6 @@ nmap s <Plug>(easymotion-overwin-f2)
 
 " map <A-t> :tabnew<CR>
 
-" incsearch finder remap hotkeys
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
 nmap <Leader>sp :call <SID>SynStack()<CR>
 function! <SID>SynStack()                                                       " Tool for recover style of current position cursor
   if !exists("*synstack")
@@ -403,11 +375,6 @@ autocmd BufEnter * :syntax sync fromstart
 let g:NERDTreeChDirMode = 0                                                     "Always change the root directory
 let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
-
-" let g:WebDevIcons_conceal_nerdtree_brackets = 0                                 "Eliminando el padding izquierdo
-" let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
-" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 
 let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
 " let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer

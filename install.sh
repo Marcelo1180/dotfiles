@@ -15,13 +15,16 @@ FORMULAE=(
   htop
   git-flow
   pipenv
+  pyenv
   tmux
-  vim
+  nvim
+  nvm
 )
 
 # UI
 CASKS=(
   alfred
+  android-file-transfer
   balenaetcher
   blender
   calibre
@@ -68,8 +71,7 @@ title_echo() {
 
 function linkFile() {
   MESSAGE=$f
-  # rm -fr ~/$f && ln -sf $(pwd)/$f ~/$f && ok_echo || err_echo
-  ok_echo || err_echo
+  rm -f ~/$f && ln -sf $(pwd)/$f ~/$f && ok_echo || err_echo
 }
 
 # Link dotfiles to specific directory
@@ -79,7 +81,7 @@ function lnDotFiles() {
   for f in $(ls -1a | awk '/^\./' | awk '!/^.$|^..$|^.git$|^.gitignore$/'); do
     case "$f" in
       .config)
-        f='.config/vim' ; linkFile
+        mkdir -p ~/.config && f='.config/nvim' ; linkFile
         ;;
       *)
         linkFile
@@ -101,11 +103,12 @@ function main(){
   echo
   MESSAGE="Install Brew CLI Apps" ; title_echo
   echo
-  # brew install ${CASKS[@]} --cask
+  brew install ${FORMULAE[@]} --formulae
   echo
   MESSAGE="Install Brew UI Apps" ; title_echo
   echo
-  # brew install ${CASKS[@]} --cask
+  brew tap homebrew/cask-fonts
+  brew install ${CASKS[@]} --cask
 }
 
 # Ask actions
