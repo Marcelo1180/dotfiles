@@ -36,6 +36,7 @@ CASKS=(
   notion
   postman
   rescuetime
+  ripgrep
   slack
   spark
   spotify
