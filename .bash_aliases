@@ -8,7 +8,7 @@ alias vv='nvim .'
 # Git
 alias gb='git branch'
 alias gp='git push origin'
-alias gac='git add . | git commit -m'
+alias gac='git add . && git commit -m'
 alias gfs='git flow feature start'
 alias gff='git flow feature finish'
 
