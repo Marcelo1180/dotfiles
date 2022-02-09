@@ -1,7 +1,7 @@
 # Marcelo1180 dotfiles
 
 ## Requirements
-- MacOsX Big Sur
+- MacOsX Monterey
 - [Homebrew](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-macos)
 
 ## Installation
