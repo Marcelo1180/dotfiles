@@ -1,4 +1,4 @@
-"
+  "
 " __   _(_)_ __ ___  _ __ ___ 
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__ 
@@ -9,6 +9,10 @@
 let g:mapleader = ","
 set encoding=UTF-8
 syntax enable
+
+"# Sets {{{
+
+"}}}
 "# Plugins {{{
 call plug#begin( '~/.config/nvim/bundle')
 " Base
@@ -20,26 +24,31 @@ Plug 'alvan/vim-closetag'                                                       
 Plug 'christoomey/vim-tmux-navigator'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }            " Work with coc-emmet
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }                       " tabnine IA Productivity if dont work, force install ./install.sh
 " Third-party
+Plug 'dense-analysis/ale'                                                       " Linter for multi-lenguages
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'                                                         " Testing multiple lenguages tt
 Plug 'easymotion/vim-easymotion'                                                " Moverse con teclas en la pantalla
+" Plug 'Shougo/neosnippet'                                                        " Templates snippet for multi-lenguages
 Plug 'diepm/vim-rest-console'                                                   " Managing REST Apis in file
 Plug 'SirVer/ultisnips'
-Plug 'troydm/zoomwintab.vim'                                                    " Zoom win
 " Theme
 Plug 'mhartington/oceanic-next'
+" Visual
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'                                                   " Icons for vim (nerdtree)
 Plug 'bryanmylee/vim-colorscheme-icons'                                         " Icons color schema (vim-devicons)
 Plug 'tpope/vim-fugitive'                                                       " Mostrar branch en el airline
+Plug 'troydm/zoomwintab.vim'                                                    " Zoom win
 " Editor
 Plug 'inkarkat/vim-SyntaxRange'                                                 " Manejar contenido mixto js, html en vue por ejemplo
 Plug 'tasn/vim-tsx'                                                             " React hightlight
-Plug 'dart-lang/dart-vim-plugin'                                                " Dart highlight
 " Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
+" Plug 'othree/yajs.vim'                                                          "Parseador para javascript incluye arrow functions y otros
 call plug#end()
 
 "}}}
@@ -47,20 +56,20 @@ call plug#end()
 filetype plugin indent on                                                       "Enable plugins and indents by filetype
 let g:plug_shallow = 0
 set inccommand=nosplit                                                          "preview search and replace
-" set t_Co=256                                                                    "con urxvt
+set t_Co=256                                                                    "con urxvt
 set number                                                                      "Line numbers are good
-" set relativenumber                                                              "Show numbers relative to current line
-" set history=500                                                                 "Store lots of :cmdline history
+set relativenumber                                                              "Show numbers relative to current line
+set history=500                                                                 "Store lots of :cmdline history
 set fileencoding=utf-8                                                          "Set utf-8 encoding on write
-" set background=dark                                                             "Set background to dark
+set background=dark                                                             "Set background to dark
 set fillchars+=vert:\│                                                          "Make vertical split separator full line
-" set pumheight=30                                                                "Maximum number of entries in autocomplete popup
-" set exrc                                                                        "Allow using local vimrc
-" set secure                                                                      "Forbid autocmd in local vimrc
+set pumheight=30                                                                "Maximum number of entries in autocomplete popup
+set exrc                                                                        "Allow using local vimrc
+set secure                                                                      "Forbid autocmd in local vimrc
 set cursorline                                                                  "Highlight current line
 set mouse=a                                                                     "Enable mouse usage
 set showmatch                                                                   "Highlight matching bracket
-set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate set splitright                                                      
+set gcr=a:blinkon500-blinkwait500-blinkoff500                                   "Set cursor blinking rate set splitright                                                                  "Set up new vertical splits positions
 set splitbelow                                                                  "Set up new horizontal splits positions
 syntax on                                                                       "turn on syntax highlighting
 
@@ -99,14 +108,60 @@ autocmd FileType python set sts=4
 autocmd BufRead,BufNewFile Vagrantfile set ft=ruby
 
 " }}}
+" ================ Auto commands ====================== {{{
+
+" augroup vimrc
+"   autocmd!
+" augroup END
+
+" autocmd vimrc FileType php setlocal sw=4 sts=4 ts=4                             "Set indentation to 4 for php
+" autocmd vimrc FocusGained,BufEnter * checktime                                  "Refresh file when vim gets focus
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+
+
+" se debe instalar node-plantuml y pacman -Sy jre-openjdk
+" npm install node-plantuml -g
+" autocmd BufRead,BufNewFile *.puml set filetype=plantuml
+" function! PreviewUML()
+"   execute "silent !feh --reload 0.1 /tmp/file.png"
+" endfunction
+" function! Synctex()
+"   execute 'silent !puml generate '.@%.' -o /tmp/file.png' 
+" endfunction
+" autocmd FileType plantuml autocmd BufWritePost <buffer> call Synctex()
+"
+" autocmd FileType plantuml command! Preview call PreviewUML()
+" autocmd FileType plantuml nnoremap<buffer> <Leader>T :call PreviewUML()
+
+
+" }}}
 "# Colorscheme setup {{{
 silent! colorscheme OceanicNext 
 let g:airline_theme='oceanicnext'
+
+" }}}
+" ================ Completion ======================= {{{
+" set wildmode=list:full
+" set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing
+" set wildignore+=*.git*
+" set wildignore+=*.meteor*
+" set wildignore+=*vim/backups*
+" set wildignore+=*sass-cache*
+" set wildignore+=*cache*
+" set wildignore+=*logs*
+" set wildignore+=*node_modules/**
+" set wildignore+=*DS_Store*
+" set wildignore+=*.gem
+" set wildignore+=log/**
+" set wildignore+=tmp/**
+" set wildignore+=*.png,*.jpg,*.gif
+
 " }}}
 "# Scrolling {{{
-" set scrolloff=8                                                                 "Start scrolling when we're 8 lines away from margins
-" set sidescrolloff=15
-" set sidescroll=5
+set scrolloff=8                                                                 "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=5
 " }}}
 "# Statusline {{{
 set statusline=\ %{toupper(mode())}                                             "Mode
@@ -124,14 +179,71 @@ set statusline+=\ \│\ %c                                                      
 " set statusline+=\ \│%1*%{ALEGetStatusLine()}%*                                  "Errors count
 "}}}
 "# Abbreviations {{{
-" cnoreabbrev t tabe
+cnoreabbrev t tabe
 " }}}
 "# Functions {{{
 " Creando nuevo tipo de archivo para una extension vue
 autocmd BufRead,BufNewFile *.vue set filetype=html
 
+function! AutoRetabSpaces()
+  exec 'set expandtab'
+  exec 'retab'
+endfunction
 
-" " Autocompletado para neosnippet
+" Vim-test addon for vagrant  and .vim.conf
+function! VagrantTransform(cmd) abort                                           " Personalized Vagrant env with file .vim.conf
+  let s:filepath = fnamemodify('.vim.conf', ':p')
+  if filereadable(s:filepath)
+    py3 import sys
+    py3 import vim
+    py3 sys.argv = [vim.eval('s:filepath'), vim.eval('a:cmd')]
+    py3file ~/.config/nvim/pyscripts/vim-test/vagrant.py
+    return py3eval('pycmd')
+  else
+    return a:cmd
+  endif
+endfunction
+let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
+let g:test#transformation = 'vagrant'
+
+
+
+function s:popup_filter(winid, key) abort
+  if a:key ==# "\<c-j>"
+    call win_execute(a:winid, "normal! \<c-e>")
+  elseif a:key ==# "\<c-k>"
+    call win_execute(a:winid, "normal! \<c-y>")
+  elseif a:key ==# "\<c-g>"
+    call win_execute(a:winid, "normal! G")
+  elseif a:key ==# "\<c-t>"
+    call win_execute(a:winid, "normal! gg")
+  elseif a:key ==# 'q'
+    call popup_close(a:winid)
+  else
+    return v:false
+  endif
+    return v:true
+endfunction
+
+function! DemoPython()
+  " call popup_clear()
+  " call popup_create("Demo", {'close': 'button', 'border': [0,1,1,0] })
+  " py3file ~/demo.py
+  let vimrc_buffer = bufnr('~/.vimrc')
+  let popup = popup_create(vimrc_buffer, {
+    \ 'minwidth': 50,
+    \ 'maxwidth': 50,
+    \ 'maxheight': 20,
+    \ 'border': [],
+    \ 'close': 'button',
+    \ 'filter': funcref('s:popup_filter'),
+    \ 'filtermode': 'n',
+    \ 'mapping': v:false,
+    \ 'resize': 1,
+  \ })
+endfunction
+
+" Autocompletado para neosnippet
 " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " \ "\<Plug>(neosnippet_expand_or_jump)"
 " \ : pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -142,68 +254,23 @@ autocmd BufRead,BufNewFile *.vue set filetype=html
 " \ "\<Plug>(neosnippet_jump)"
 " \: "\<TAB>"
 "
-"
-" " Coc autocompletion TAB
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Coc autocompletion TAB
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " }}}
-
 
 " nmap <Leader>` :new ~/.config/vim/doc/demo.txt \| set nomodifiable<CR>
 " xmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>f  <Plug>(coc-format-selected)
-
-nnoremap q :undo<CR>
-nnoremap Q :redo<CR>
-
-nnoremap u :Buffers<CR>
-
-nnoremap e y
-map E "+y
-
-nnoremap r :so %<CR>
-
-nnoremap t :bp<CR>
-nnoremap T :bp<CR>
-
-nnoremap P <Esc>"+p
-nnoremap <C-p> :Files<CR>
-
-nnoremap s :w<CR>
-nmap S <Plug>(easymotion-overwin-f2)
-
-noremap d d
-noremap i i
-noremap g g
-
-nnoremap f viwc
-nnoremap F C
-
-nnoremap H b
-nnoremap J }
-nnoremap K {
-nnoremap L w
-
-nnoremap z :ZoomWinTabToggle<CR>
-
-nnoremap w viw
-nnoremap " vi"
-nnoremap ' vi'
-nnoremap ( vi(
-nnoremap [ vi[
-nnoremap < vi<
-
-
-
 nmap <leader>f  <Plug>(coc-format)
 xmap <leader>f  <Plug>(coc-format-selected)
 
 "# Custom mappings {{{
-" noremap <Leader>r :so %<CR>
+noremap <Leader>r :so %<CR>
 
 noremap <Leader>hp :call DemoPython()<CR>
 
@@ -221,7 +288,7 @@ nnoremap <Leader>e :lopen<CR>
 nnoremap <Leader>q :lclose<CR>
 
 " Corregir errores de ALEFix
-" nmap <silent> ff :ALEFix<CR>
+nmap <silent> ff :ALEFix<CR>
 
 " Tecla para activar los test
 nmap <silent> tt :TestNearest<CR>
@@ -250,7 +317,7 @@ endfunction
 
 map 'r' :so ~/.config/nvim/init.vim<CR>
 " Map save to Ctrl + S
-
+map <c-s> :w<CR>
 imap <c-s> <C-o>:w<CR>
 nnoremap <Leader>s :w<CR>
 
@@ -268,15 +335,14 @@ nnoremap Y y$
 
 " Copy/Paste to system clipboard
 vnoremap <C-c> "+y
-
-
+inoremap <C-v> <Esc>"+p
 nnoremap <Leader>p "0p
 vnoremap <Leader>p "0p
 nnoremap <Leader>h viw"0p
 
 " Move selected lines up and down
-" vnoremap J :m '>+1<CR>gv=gv
-" vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Clear search highlight
 nnoremap <Leader><space> :noh<CR>
@@ -286,10 +352,10 @@ nnoremap <Leader><space> :noh<CR>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " Hacer zoom en ventana layout
-
+" nnoremap <C-f> :ZoomWinTabToggle<CR>
 
 " Toggle buffer list
-
+nnoremap <C-p> :Files<CR>
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bt :BTags<CR>
 nnoremap <Leader>bh :History<CR>
@@ -303,57 +369,18 @@ xnoremap <s-tab> <gv
 xnoremap <tab> >gv
 
 " Resize window with shift + and shift -
-" nnoremap + <c-w>5>
-" nnoremap _ <c-w>5<
+nnoremap + <c-w>5>
+nnoremap _ <c-w>5<
 
 " Center highlighted search
 nnoremap n nzz
 nnoremap N Nzz
 
 " Generate tags
-" nnoremap <Leader>gt :sp term://ctags -R --exclude=node_modules .<CR>G
-
-" --------------------------------------------------------
-" COC-VIM TAB SETTINGS START
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" /
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" COC-VIM TAB SETTINGS END
-" --------------------------------------------------------
-" Prevent problem with TAB completion to coc-vim
-let g:UltiSnipsExpandTrigger="<Nop>"
+nnoremap <Leader>gt :sp term://ctags -R --exclude=node_modules .<CR>G
 
 " nmap s <Plug>(easymotion-s2)
-
+nmap s <Plug>(easymotion-overwin-f2)
 
 " map <A-t> :tabnew<CR>
 
@@ -379,20 +406,20 @@ let g:NERDTreeShowHidden = 1                                                    
 " let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
 " let g:deoplete#tag#cache_limit_size = 10000000                                  "Allow tags file up to ~10 MB
 
-" let g:ale_linters = {
-"     \ 'javascript': ['eslint'],
-"     \ 'python':     ['flake8'],
-"   \ }                                                                           " Lint js with eslint
-" let g:ale_fixers = {
-"     \ 'javascript': ['prettier', 'eslint'],
-"     \ "json":       ['prettier'],
-"     \ 'python':     ['black'],
-"   \ }                                                                           "Fix eslint errors
-" let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
-" let g:ale_lint_on_save = 1                                                      "Lint when saving a file
-" let g:ale_sign_error = '✖'                                                      "Lint error sign
-" let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
-" let g:ale_statusline_format =['[%linter%] %d E ', '[%linter%] %d W ', '']                           "Status line texts
+let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \ 'python':     ['flake8'],
+  \ }                                                                           " Lint js with eslint
+let g:ale_fixers = {
+    \ 'javascript': ['prettier', 'eslint'],
+    \ "json":       ['prettier'],
+    \ 'python':     ['black'],
+  \ }                                                                           "Fix eslint errors
+let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
+let g:ale_lint_on_save = 1                                                      "Lint when saving a file
+let g:ale_sign_error = '✖'                                                      "Lint error sign
+let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
+let g:ale_statusline_format =['[%linter%] %d E ', '[%linter%] %d W ', '']                           "Status line texts
 
 let g:tmux_navigator_disable_when_zoomed = 1                                    "Disable tmux navigation on fullscreen
 
@@ -418,9 +445,6 @@ let g:vrc_curl_opts = {
 " \ 'line_limit': 500,
 " \ 'max_num_results': 20,
 " \ })
-
-let g:dart_style_guide = 2
-let g:dart_format_on_save = 1
 
 " }}}
 " vim:foldenable:foldmethod=marker
