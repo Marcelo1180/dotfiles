@@ -9,41 +9,54 @@
 let g:mapleader = ","
 set encoding=UTF-8
 syntax enable
-"# Plugins {{{
-call plug#begin( '~/.config/nvim/bundle')
-" Base
-Plug 'scrooloose/nerdtree'                                                      " Navegador de directorios
-Plug 'Xuyuanp/nerdtree-git-plugin'                                              " Mostrar estados en nerdtree
-Plug 'tomtom/tcomment_vim'                                                      " Comentar codigo
-Plug 'cohama/lexima.vim'                                                        " Auto cerrar (, {
-Plug 'alvan/vim-closetag'                                                       " Auto cerrar html
-Plug 'christoomey/vim-tmux-navigator'
-" Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }            " Work with coc-emmet
-" Third-party
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'janko-m/vim-test'                                                         " Testing multiple lenguages tt
-Plug 'easymotion/vim-easymotion'                                                " Moverse con teclas en la pantalla
-Plug 'diepm/vim-rest-console'                                                   " Managing REST Apis in file
-Plug 'SirVer/ultisnips'
-Plug 'troydm/zoomwintab.vim'                                                    " Zoom win
-" Theme
-Plug 'mhartington/oceanic-next'
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'                                                   " Icons for vim (nerdtree)
-Plug 'bryanmylee/vim-colorscheme-icons'                                         " Icons color schema (vim-devicons)
-Plug 'tpope/vim-fugitive'                                                       " Mostrar branch en el airline
-" Editor
-Plug 'inkarkat/vim-SyntaxRange'                                                 " Manejar contenido mixto js, html en vue por ejemplo
-Plug 'tasn/vim-tsx'                                                             " React hightlight
-Plug 'dart-lang/dart-vim-plugin'                                                " Dart highlight
-" Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
-call plug#end()
 
-"}}}
+let g:python3_host_prog = '/Users/marcelo/.pyenv/shims/python'
+  "# Plugins {{{
+  call plug#begin( '~/.config/nvim/bundle')
+  " Base
+  Plug 'scrooloose/nerdtree'                                                      " Navegador de directorios
+  Plug 'Xuyuanp/nerdtree-git-plugin'                                              " Mostrar estados en nerdtree
+  Plug 'tomtom/tcomment_vim'                                                      " Comentar codigo
+  Plug 'cohama/lexima.vim'                                                        " Auto cerrar (, {
+  Plug 'alvan/vim-closetag'                                                       " Auto cerrar html
+  Plug 'christoomey/vim-tmux-navigator'
+  " Autocomplete
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Third-party
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'janko-m/vim-test'                                                         " Testing multiple lenguages tt
+  Plug 'easymotion/vim-easymotion'                                                " Moverse con teclas en la pantalla
+  " Plug 'diepm/vim-rest-console'                                                   " Managing REST Apis in file
+  " Plug 'SirVer/ultisnips'
+  Plug 'troydm/zoomwintab.vim'                                                    " Zoom win
+  Plug 'rhysd/devdocs.vim'                                                        " DevDocs
+
+  " Theme
+  Plug 'mhartington/oceanic-next'
+  Plug 'vim-airline/vim-airline'
+  Plug 'ryanoasis/vim-devicons'                                                   " Icons for vim (nerdtree)
+  Plug 'bryanmylee/vim-colorscheme-icons'                                         " Icons color schema (vim-devicons)
+  Plug 'tpope/vim-fugitive'                                                       " Mostrar branch en el airline
+  " Editor
+  Plug 'inkarkat/vim-SyntaxRange'                                                 " Manejar contenido mixto js, html en vue por ejemplo
+  " Plug 'tasn/vim-tsx'                                                             " React hightlight
+  
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+
+  " Plug 'dart-lang/dart-vim-plugin'                                                " Dart highlight
+  " Plug 'yuezk/vim-js'                                                             " React suggested by vim-jsx-pretty
+  " Plug 'maxmellon/vim-jsx-pretty'                                                 " React highlight
+
+  " Plug 'file:////home/jarteaga/MARCELO/CODE/VIMPLUGINS/demoplugin'
+  call plug#end()
+
+  "}}}
 "# General Config {{{
+let g:coc_disable_startup_warning = 1                                           "Disable coc warning at start
 filetype plugin indent on                                                       "Enable plugins and indents by filetype
 let g:plug_shallow = 0
 set inccommand=nosplit                                                          "preview search and replace
@@ -130,6 +143,8 @@ set statusline+=\ \│\ %c                                                      
 " Creando nuevo tipo de archivo para una extension vue
 autocmd BufRead,BufNewFile *.vue set filetype=html
 
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " " Autocompletado para neosnippet
 " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
@@ -157,55 +172,39 @@ autocmd BufRead,BufNewFile *.vue set filetype=html
 " xmap <leader>f  <Plug>(coc-format-selected)
 " nmap <leader>f  <Plug>(coc-format-selected)
 
-nnoremap q :undo<CR>
-nnoremap Q :redo<CR>
 
-nnoremap u :Buffers<CR>
 
-nnoremap e y
-map E "+y
+" nnoremap u :Buffers<CR>
 
-nnoremap r :so %<CR>
+" nnoremap e y
+" map E "+y
 
-nnoremap t :bp<CR>
-nnoremap T :bp<CR>
+" nnoremap r :so %<CR>
 
-nnoremap P <Esc>"+p
-nnoremap <C-p> :Files<CR>
+" nnoremap t :bp<CR>
+" nnoremap T :bp<CR>
 
-nnoremap s :w<CR>
-nmap S <Plug>(easymotion-overwin-f2)
+" nnoremap P <Esc>"+p
 
-noremap d d
-noremap i i
-noremap g g
+" noremap d d
+"
+" noremap g g
 
-nnoremap f viwc
-nnoremap F C
 
-nnoremap H b
-nnoremap J }
-nnoremap K {
-nnoremap L w
-
-nnoremap z :ZoomWinTabToggle<CR>
-
-nnoremap w viw
-nnoremap " vi"
-nnoremap ' vi'
-nnoremap ( vi(
-nnoremap [ vi[
-nnoremap < vi<
+" nnoremap F C
 
 
 
-nmap <leader>f  <Plug>(coc-format)
-xmap <leader>f  <Plug>(coc-format-selected)
+
+
+
+
+
 
 "# Custom mappings {{{
 " noremap <Leader>r :so %<CR>
 
-noremap <Leader>hp :call DemoPython()<CR>
+" noremap <Leader>hp :call DemoPython()<CR>
 
 " Comment text editor
 nmap <Leader>c :TComment<CR>
@@ -225,6 +224,9 @@ nnoremap <Leader>q :lclose<CR>
 
 " Tecla para activar los test
 nmap <silent> tt :TestNearest<CR>
+
+" Key for call dash documentation
+nmap <c-d> :Dash<CR>
 
 " Keymap to Help Hotkeys window
 " nmap <silent> hh :call HelpHotkeys()<CR>
@@ -315,37 +317,62 @@ nnoremap N Nzz
 
 " --------------------------------------------------------
 " COC-VIM TAB SETTINGS START
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" /
+"
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+" /
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
+
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" if exists('*complete_info')
+"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" else
+"   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
 
 " COC-VIM TAB SETTINGS END
 " --------------------------------------------------------
@@ -357,13 +384,13 @@ let g:UltiSnipsExpandTrigger="<Nop>"
 
 " map <A-t> :tabnew<CR>
 
-nmap <Leader>sp :call <SID>SynStack()<CR>
-function! <SID>SynStack()                                                       " Tool for recover style of current position cursor
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
+" nmap <Leader>sp :call <SID>SynStack()<CR>
+" function! <SID>SynStack()                                                       " Tool for recover style of current position cursor
+"   if !exists("*synstack")
+"     return
+"   endif
+"   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+" endfunc
 " }}}
 "# Plugins setups {{{
 " Corrige error de sincronizado de estilos en las sintaxis de nvim
@@ -423,6 +450,26 @@ let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
 
 " }}}
+
+
+" Use K to show documentation in preview window
+" nnoremap <silent> gk :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
+source /Users/marcelo/.config/nvim/map.vim
 " vim:foldenable:foldmethod=marker
 " hi Normal guibg=NONE ctermbg=NONE
 "

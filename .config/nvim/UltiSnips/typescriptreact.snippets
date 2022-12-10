@@ -1,0 +1,64 @@
+# vim: set ts=2 sts=2 sw=2 ft=javascript:
+
+snippet rr
+import React from 'react';
+
+const `!p snip.rv = snip.basename` = () => {
+  return <div></div>
+};
+
+export default `!p snip.rv = snip.basename`;
+endsnippet
+
+snippet co
+  console.log('X+=-----------------------------------------=+X');
+  console.log(${0});
+  console.log('X+=-----------------------------------------=+X');
+
+snippet fo 
+  for(let ${1}=0;$1<=${0};$1++){
+  }
+
+snippet le
+  let ${1} = ${0};
+
+snippet ar 
+  ${1:methodName}(${2:args}) => {
+    ${0}
+  }
+
+snippet iife
+    (function(${2}) {
+        ${0}
+    })(${1});
+
+snippet mtd
+  ${1:methodName}(${2:args}) {
+    ${0}
+  }
+
+snippet creact
+    import React, { Component } from 'react'
+
+    export default class ${1} extends Component {
+      constructor(props) {
+        super(props)
+      }
+
+      render() {
+        return (${2})
+      }
+    }
+
+snippet cnode
+    class ${1:className} {
+      constructor(${2:deps}) {
+        this._$2 = $2;
+      }
+
+      ${3:method}(${4:params}) {
+        ${0}
+      }
+    }
+
+    module.exports = $1;

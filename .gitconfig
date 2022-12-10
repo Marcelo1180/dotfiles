@@ -1,9 +1,9 @@
 [user]
-	name = Marcelo Arteaga
+	name = marcelo.arteaga
 	email = arteagamarcelo@gmail.com
 
 [color]
-	ui = true
+	ui = auto
 
 [diff]
     tool = meld
@@ -13,3 +13,5 @@
 
 [difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
+[credential]
+	helper = osxkeychain
