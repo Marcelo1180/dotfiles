@@ -12,7 +12,7 @@
     ~/.ssh/config: ssh/config
 
 - create:
-    - ~/downloads
+    - ~/.completion
     - ~/.vim/undo-history
 
 - shell:
