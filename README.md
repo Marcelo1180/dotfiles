@@ -1,52 +1,24 @@
 # Marcelo1180 dotfiles
 
 ## Requirements
-- MacOsX Monterey
+- MacOsX Ventura
 - [Homebrew](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-macos)
 
 ## Installation
 
-You need a git client
-```sh
-brew install git
-```
-
 You need to clone the repository at home (~)
 ```bash
-git clone https://github.com/Marcelo1180/dotfiles.git ~/.dotfiles
+git clone https://github.com/Marcelo1180/dotfiles.git ~/.dotfiles && \
+cd ~/.dotfiles && \
+git submodule update --init --recursive && \
+./install
 ```
 
-Run installer
+## Update
 ```bash
-cd ~/.dotfiles
-chmod +x install.sh
-./install.sh
-```
-
-Run after installation of NVIM
-[Reference](https://github.com/junegunn/vim-plug)
-```sh
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-
-Run after installation of FZF
-[Reference](https://sourabhbajaj.com/mac-setup/iTerm/fzf.html)
-```sh
-/usr/local/opt/fzf/install
-```
-
-Autorun after installation, edit ~/.zshrc
-```sh
-...
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files'
-source ~/.bash_aliases
-```
-
-Pyenv autorun after installation, edit ~/.zprofile
-```sh
-eval "$(pyenv init --path)"
+git pull && \
+git submodule update --init --recursive && \
+./install
 ```
 
 ## License
