@@ -1,10 +1,5 @@
 # General
 .DS_Store
-.ssh
-
-# nvim
-./.config/nvim/backups/
-./.config/nvim/bundle/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,11 +1,7 @@
-alias nube='cd /Users/marcelo/Library/Mobile\ Documents/com~apple~CloudDocs'
+alias n='nvim .'
 alias ss='ssh **'
 alias ll='ls -la'
-alias tt='python manage.py test'
-alias rr='python manage.py runserver 0.0.0.0:8000'
 
-alias vv='nvim .'
-# Git
 alias gs='git status'
 alias gl='git log'
 alias gb='git branch'
@@ -16,8 +12,9 @@ alias gfs='git flow feature start'
 alias gff='git flow feature finish -k'
 
 # Django
+alias tt='python manage.py test'
+alias rr='python manage.py runserver 0.0.0.0:8000'
 alias dr='python manage.py runserver'
-# alias ds='(cd base/apps && django-admin startapp advisor)'
 alias ds='mkdir ./base/apps/advisor && django-admin startapp advisor ./base/apps/advisor'
 
 # Python

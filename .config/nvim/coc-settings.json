@@ -1,8 +1,0 @@
-{
-  "suggest.noselect": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/Users/marcelo/.pyenv/shims/black",
-  "python.formatting.blackArgs": ["--diff", "--quiet", "--fast"],
-  "python.linting.flake8Enabled": true,
-  "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"}
-}

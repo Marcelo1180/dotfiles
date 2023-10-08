@@ -6,12 +6,16 @@
 	ui = auto
 
 [diff]
-    tool = meld
+  tool = meld
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [difftool "meld"]
-    cmd = meld "$LOCAL" "$REMOTE"
+  cmd = meld "$LOCAL" "$REMOTE"
+
 [credential]
 	helper = osxkeychain
+
+[merge]
+	tool = meld

@@ -1,0 +1,20 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.zshrc: .zshrc
+    ~/.tmux.conf: tmux.conf
+    ~/.config/nvim: config/nvim
+    ~/.completion/django_bash_completion: completion/django_bash_completion
+    ~/.ssh/config: ssh/config
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+
+- shell:
+  - [defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.dotfiles/system/macosx/iterm2/", Setting default preferences folder]
+  - [defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true, Setting autoload preferences]

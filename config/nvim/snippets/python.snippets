@@ -1,0 +1,201 @@
+# vim: set ts=4 sts=4 sw=4 ft=python:
+
+snippet print "A simple print command"
+print("======================================================")
+print(${0})
+print("======================================================")
+endsnippet
+
+
+# Django
+# - Models
+snippet dj-model "Django Models Init"
+from django.db import models
+
+
+class ${0}(models.Model):
+    name = models.CharField(max_length=200, verbose_name="${0} name")
+
+    class Meta:
+        verbose_name = "${0}"
+        verbose_name_plural = "${0}s"
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+endsnippet
+
+snippet dmm "Django Model Manager"
+class ${0}Manager(models.Manager):
+    def demo(self, param1):
+      pass
+endsnippet
+
+# - Serializers
+snippet dsi "Django Serializers Init"
+from rest_framework import serializers
+from .models import ${0}
+from .serializers import ${0}Serializer
+
+
+class ${0}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = ${0}
+        fields = "__all__"
+endsnippet
+
+snippet ds "Django Serializer"
+class ${0}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = ${0}
+        fields = "__all__"
+endsnippet
+
+# - Views
+snippet dvi "Django View Init"
+from rest_framework import viewsets
+from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .models import ${0}
+
+class ${0}ViewSet(viewsets.ModelViewSet):
+    """
+    DETAIL, ACCESS ROL: ANONYMOUS, LIST ADD UPDATE DELETE, ACCESS ROL: ADMIN
+
+    ${0} Model
+    """
+
+    queryset = ${0}.objects.all()
+    serializer_class = ${0}Serializer
+    permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
+endsnippet
+
+snippet dv "Django View"
+class ${0}ViewSet(viewsets.ModelViewSet):
+    """
+    DETAIL, ACCESS ROL: ANONYMOUS, LIST ADD UPDATE DELETE, ACCESS ROL: ADMIN
+
+    ${0} Model
+    """
+
+    queryset = ${0}.objects.all()
+    serializer_class = ${0}Serializer
+    permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
+endsnippet
+
+# - Urls
+snippet dui "Django Urls Init"
+from django.urls import path
+from django.conf.urls import include
+from rest_framework.routers import DefaultRouter
+from base.apps.demo import views
+
+
+router = DefaultRouter()
+"""
+${0}
+"""
+router.register(r"${0}", views.${0}ViewSet)
+
+
+urlpatterns = [
+    path("", include(router.urls)),
+]
+endsnippet
+
+snippet du "Django Url"
+router = DefaultRouter()
+"""
+${0}
+"""
+router.register(r"${0}", views.${0}ViewSet)
+endsnippet
+
+
+snippet da "Django Admin"
+from .models import ${0}
+
+"""
+${0}
+"""
+admin.site.register(${0})
+endsnippet
+
+
+
+# snippet print
+# options word
+#   print(${0})
+#
+# snippet prints
+# options word
+#   print("${0}")
+#
+# snippet     class
+# abbr        class Class(...): ...
+# options     head
+# 	class ${1:#:name}(${2:object}):
+#
+# 		def __init__(self, ${3}):
+# 			${0:pass}
+#
+# snippet     classd
+# abbr        class Class(...): "..."
+# options     head
+# 	class ${1:#:name}(${2:object}):
+# 		"""${3:#:class documentation}"""
+#
+# 		def __init__(self, ${4}):
+# 			"""${5:#:__init__ documentation}"""
+# 			${0:pass}
+#
+#
+# snippet     TestSample
+# abbr        class TestCase(...): ...
+# options     head
+# 	from django.test import TestCase, Client
+# 	from rest_framework import status
+# 	from rest_framework.test import APITestCase
+#
+#
+# 	class TestCase${0:#:Name}(APITestCase):
+#     fixtures = ["path/demo.json"]
+#
+# 		def setUp(self):
+# 			self.client = Client()
+#
+# 		def test_sample(self):
+# 			# Issue
+# 			body = {"key": "value"}
+# 			response = self.client.post("/api/v1/path", body)
+# 			# Check status code
+# 			self.assertEqual(response.status_code, status.HTTP_200_OK)
+# 			# Check assert
+# 			self.assertEqual("demo", response.json())
+#
+# snippet     Test
+# abbr        class TestCase(...): ...
+# options     head
+# 	class TestCase${1:#:Name}(APITestCase):
+#     fixtures = ["${0:path/demo.json}"]
+#
+# 		def setUp(self):
+# 			self.client = Client()
+#
+# snippet     test
+# abbr        def test_case(...): ...
+# options     head
+# 	def test_${1:#:name_case}(self):
+#     # Issue
+# 		${5:body = \{"key": "value"\}}
+# 		response = self.client.${2:get}("${3:/api/v1/path}"${4:, body})
+# 		# Check status code
+# 		self.assertEqual(response.status_code, status.${6:HTTP_200_OK})
+# 		# Check assert
+# 		self.assertEqual("${0:sample}", response.json())
+#
+# snippet at
+# options word
+#     {{ '${1}' | translate }}${0}

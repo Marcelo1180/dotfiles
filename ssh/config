@@ -1,0 +1,38 @@
+# PERSONAL GITHUB ACCOUNT
+# ==================================
+# ssh-keygen -t rsa -C "arteagamarcelo@gmail.com"
+Host github.com
+  HostName github.com
+  User Marcelo1180
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/marcelo
+  IdentitiesOnly yes
+
+# USING DIFFERENT ACCOUNTS ON GITHUB
+# ==================================
+# git remote set-url origin git@gh-ma:Marcelo1180/repo_demo.git
+# Host gh-ma
+#  HostName github.com
+#  User Marcelo1180
+#  AddKeysToAgent yes
+#  UseKeychain yes
+#  IdentityFile ~/.ssh/jarteaga
+#  IdentitiesOnly yes
+
+
+# BASTION HOST SAMPLE
+# ===================
+# You can jump to other host accesing to the first one (bastion)
+# Befor you need to copy your public key
+# ssh-copy-id -i ~/.ssh/jarteaga.pub userdemo@190.129.60.186
+# ssh-copy-id -i ~/.ssh/jarteaga.pub front
+# Host bastion
+#   HostName 190.129.60.186
+#   User userdemo
+#   Port 22
+#
+# Host front
+#   HostName 192.168.0.204
+#   User userdemo
+#   ProxyJump bastion
